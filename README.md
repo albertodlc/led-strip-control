@@ -62,10 +62,14 @@ The basic set-up of the project is:
 1. A Google account and an IFTT account.
 
 ## Sniffing Bluetooth packets and reverse engineering the commands
+### Requirements
 
 
-## Creating an API-REST service ()
+## Creating an API-REST service
 ### Requirements
 
 ## Google Assistant integration with the API-REST
 ### Requirements
+After defining the API-REST methods, we need to set the IFTT services. IFTT refers to:
+
+`If This Then That (commonly known as IFTTT, /ɪft/) is a web-based service that allows users to create chains of conditional statements triggered by changes that occur within other web services such as Gmail, Facebook, Telegram, Instagram, Pinterest or Google Assistant`
