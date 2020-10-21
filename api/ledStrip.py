@@ -8,10 +8,12 @@ app.config["DEBUG"] = True
 
 # API definition
 
-MAC_ADDR = ["85:58:1B:08:AD:ED", # Mesa 1
-            "52:14:00:00:C6:A9", # Techo
+MAC_ADDR = [
+            "85:58:1B:08:AD:ED", # Mesa 1
             "85:58:1B:08:97:4D", # Mesa 2
-            "85:58:1B:08:C6:67"] # Mesa 3
+            "85:58:1B:08:C6:67", # Mesa 3
+            "52:14:00:00:C6:A9" # Techo
+            ]
 
 # LED STRIP SERVICES (Depend of the strip, maybe you have to CHANGE THIS)
 LED_SERVICES = [
@@ -95,7 +97,6 @@ class DeviceControl:
 
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
-        #self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
 
     #def show_perif_services_char(self):
     #    print("\n\tDevice:" + self.p.addr)
@@ -118,17 +119,11 @@ class DeviceControl:
     #        for ch in s.getCharacteristics():
     #            print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
     def turn_on(self):
-        #p = Peripheral(self.mac_addr)
-        #s = self.p.getServiceByUUID(LED_SERVICES[4])
-        #ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         self.ch_W.write(LedStripMessages.on_message())
         self.p.disconnect()
         return ""
 
     def turn_off(self):
-        #p = Peripheral(self.mac_addr)
-        #s = p.getServiceByUUID(LED_SERVICES[4])
-        #self.ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         self.ch_W.write(LedStripMessages.off_message())
         self.p.disconnect()
 
@@ -136,23 +131,35 @@ class DeviceControl:
 class API():
     @app.route('/led/mesa/on', methods=['POST'])
     def turn_on_1():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
 
+        dc.turn_on()
+        dc1.turn_on()
+        dc2.turn_on()
         return ""
 
     @app.route('/led/techo/on', methods=['POST'])
     def turn_on_2():
-        dc = DeviceControl(MAC_ADDR[1]);
+        dc = DeviceControl(MAC_ADDR[3]);
         dc.turn_on()
         return ""
 
     @app.route('/led/mesa/off', methods=['POST'])
     def turn_off_1():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
 
+        dc.turn_off()
+        dc1.turn_off()
+        dc2.turn_off()
         return ""
 
     @app.route('/led/techo/off', methods=['POST'])
     def turn_off_2():
-        dc = DeviceControl(MAC_ADDR[1]);
+        dc = DeviceControl(MAC_ADDR[3]);
         dc.turn_off()
         return ""
 #sd = ScanDevices()
