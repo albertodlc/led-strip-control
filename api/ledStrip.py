@@ -115,7 +115,7 @@ class DeviceControl:
     #        for ch in s.getCharacteristics():
     #            print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
 
-    @app.route('/on', methods=['POST'])
+    @app.route('/on', methods=['GET'])
     def turn_on():
         mac_addr = "52:14:00:00:C6:A9"
         p = Peripheral(mac_addr)
@@ -124,7 +124,7 @@ class DeviceControl:
         ch_W.write(LedStripMessages.on_message())
         p.disconnect()
 
-    @app.route('/off', methods=['POST'])
+    @app.route('/off', methods=['GET'])
     def turn_off():
         mac_addr = "52:14:00:00:C6:A9"
         p = Peripheral(mac_addr)
