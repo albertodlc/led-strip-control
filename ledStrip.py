@@ -145,11 +145,11 @@ class DeviceControl:
 
 dc = DeviceControl("52:14:00:00:C6:A9")
 dc.turn_off()
-dc.close_connection()
+
 
 loop = True
 while(loop):
-    print("MENU 0.- ON 1.- OFF")
+    print("MENU \n0.-ON \n1.- OFF \n10.-EXIT ")
     opc = input()
     if opc == 0:
         print("Turn on light")
@@ -157,3 +157,6 @@ while(loop):
     elif opc == 1:
         print("Turn off light")
         dc.turn_off()
+    elif opc == 10:
+        dc.close_connection()
+        loop = False
