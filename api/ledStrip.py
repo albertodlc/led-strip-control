@@ -123,7 +123,7 @@ class DeviceControl:
         ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         ch_W.write(LedStripMessages.on_message())
         p.disconnect()
-        return None
+        return "Hello world"
 
     @app.route('/off', methods=['POST'])
     def turn_off():
@@ -133,7 +133,7 @@ class DeviceControl:
         ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         ch_W.write(LedStripMessages.off_message())
         p.disconnect()
-        return None
+        return "Hello world"
 #sd = ScanDevices()
 
 #for dev in sd.device_array:
