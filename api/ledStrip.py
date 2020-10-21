@@ -134,23 +134,23 @@ class DeviceControl:
 
 
 def API():
-    @app.route('/LedMesaOn', methods=['POST'])
+    @app.route('/led/mesa/on', methods=['POST'])
     def turn_on_1():
 
         return ""
 
-    @app.route('/LedTechoOn', methods=['POST'])
+    @app.route('/led/techo/on', methods=['POST'])
     def turn_on_2():
         dc = DeviceControl(MAC_ADDR[1]);
         dc.turn_on()
         return ""
 
-    @app.route('/LedMesaOff', methods=['POST'])
+    @app.route('/led/mesa/off', methods=['POST'])
     def turn_off_1():
 
         return ""
 
-    @app.route('/LedTechoOff', methods=['POST'])
+    @app.route('/led/techo/off', methods=['POST'])
     def turn_off_1():
         dc = DeviceControl(MAC_ADDR[1]);
         dc.turn_off()
