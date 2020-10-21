@@ -57,11 +57,11 @@ class LedStripMessages:
 
     @staticmethod
     def on_message():
-        return bytearray.fromhex(TURN_ON)
+        return bytearray.fromhex(LedStripMessages.TURN_ON)
 
     @staticmethod
     def off_message():
-        return bytearray.fromhex(TURN_OFF)
+        return bytearray.fromhex(LedStripMessages.TURN_OFF)
 
     @staticmethod
     def color_message(R,G,B):
