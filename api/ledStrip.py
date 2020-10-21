@@ -8,7 +8,10 @@ app.config["DEBUG"] = True
 
 # API definition
 
-MAC_INIT = ["85:58:1B", "52:14:00"]
+MAC_ADDR = ["85:58:1B:08:AD:ED", # Mesa 1
+            "52:14:00:00:C6:A9", # Techo
+            "85:58:1B:08:97:4D", # Mesa 2
+            "85:58:1B:08:C6:67"] # Mesa 3
 
 # LED STRIP SERVICES (Depend of the strip, maybe you have to CHANGE THIS)
 LED_SERVICES = [
@@ -80,18 +83,18 @@ class Utils():
         return '{:02x}{:02x}{:02x}'.format(R, G, B)
 
 class DeviceControl:
-    #def __init__(self, mac_addr):
+    def __init__(self, mac_addr):
         # Init LED STRIP with white color
-        #self.R = 255
-        #self.G = 255
-        #self.B = 255
+        self.R = 255
+        self.G = 255
+        self.B = 255
 
-        #self.mac_addr = mac_addr
+        self.mac_addr = mac_addr
 
-        #self.p = Peripheral(self.mac_addr)
+        self.p = Peripheral(self.mac_addr)
 
-        #self.s = self.p.getServiceByUUID(LED_SERVICES[4])
-        #self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.s = self.p.getServiceByUUID(LED_SERVICES[4])
+        self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         #self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
 
     #def show_perif_services_char(self):
@@ -114,24 +117,43 @@ class DeviceControl:
     #    for s in self.p.getServices():
     #        for ch in s.getCharacteristics():
     #            print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
-    @app.route('/on', methods=['POST'])
-    def turn_on():
-        mac_addr = "52:14:00:00:C6:A9"
-        p = Peripheral(mac_addr)
+    def turn_on(self):
+        p = Peripheral(self.mac_addr)
         s = p.getServiceByUUID(LED_SERVICES[4])
         ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         ch_W.write(LedStripMessages.on_message())
         p.disconnect()
         return ""
 
-    @app.route('/off', methods=['POST'])
-    def turn_off():
-        mac_addr = "52:14:00:00:C6:A9"
-        p = Peripheral(mac_addr)
+    def turn_off(self):
+        p = Peripheral(self.mac_addr)
         s = p.getServiceByUUID(LED_SERVICES[4])
         ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         ch_W.write(LedStripMessages.off_message())
         p.disconnect()
+
+
+def API():
+    @app.route('/LedMesaOn', methods=['POST'])
+    def turn_on_1():
+
+        return ""
+
+    @app.route('/LedTechoOn', methods=['POST'])
+    def turn_on_2():
+        dc = DeviceControl(MAC_ADDR[1]);
+        dc.turn_on()
+        return ""
+
+    @app.route('/LedMesaOff', methods=['POST'])
+    def turn_off_1():
+
+        return ""
+
+    @app.route('/LedTechoOff', methods=['POST'])
+    def turn_off_1():
+        dc = DeviceControl(MAC_ADDR[1]);
+        dc.turn_off()
         return ""
 #sd = ScanDevices()
 
