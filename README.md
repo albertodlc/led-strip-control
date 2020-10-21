@@ -103,10 +103,8 @@ In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
 </p>
 
 6. In the "Then that" rectangle click **add** and search for **Webhooks**, select it.
-7. Now select "Make a web request" and set the URL to
+7. Now select "Make a web request" and set "Method" to POST, "Content Type" should be text/plain and "Body" can be left blank. Finally set the URL to
 ```
 http://ipaddressgoeshere/methodyouwanttocall
 ```
-Set "Method" to POST, "Content Type" should be text/plain and "Body" can be left blank.
-
 8. Create your action and choose Finish.
