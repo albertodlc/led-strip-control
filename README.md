@@ -70,13 +70,19 @@ The basic set-up of the project is:
 
 ## Google Assistant integration with the API-REST
 ### Requirements
-After defining the **API-REST** methods, we need to set the **IFTTT services**. IFTTT refers to:
+After defining the **API-REST** methods, you need to configure a **Static IP** on your RPI, configure a **DDNS** service and configure **Port-forwarding** on your router's firewall.
 
-
+In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
 > If This Then That (commonly known as IFTTT, /ɪft/) is a web-based service that allows users to create chains of conditional statements triggered by changes that occur within other web services such as Gmail, Facebook, Telegram, Instagram, Pinterest or Google Assistant.
 > - Wikipedia
 
-### Tutorial
+### DDNS configuration (DuckDNS)
+
+
+### Port-Forwarding configuration (depends on the router model)
+
+
+### IFTTT Configuration
 1. Go to [IFTTT](https://ifttt.com) website and create a new account.
 2. Click **create** a new **Applet**.
 3. In the "If this" rectangle click **add** and search for **Google Assistant**, select it.
@@ -97,3 +103,10 @@ After defining the **API-REST** methods, we need to set the **IFTTT services**. 
 </p>
 
 6. In the "Then that" rectangle click **add** and search for **Webhooks**, select it.
+7. Now select "Make a web request" and set the URL to
+```
+http://ipaddressgoeshere/methodyouwanttocall
+```
+Set "Method" to POST, "Content Type" should be text/plain and "Body" can be left blank.
+
+8. Create your action and choose Finish.
