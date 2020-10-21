@@ -91,7 +91,7 @@ class DeviceControl:
 
         self.mac_addr = mac_addr
 
-        self.p = Peripheral(self.mac_addr, "random")
+        self.p = Peripheral(self.mac_addr)
 
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
@@ -118,19 +118,19 @@ class DeviceControl:
     #        for ch in s.getCharacteristics():
     #            print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
     def turn_on(self):
-        p = Peripheral(self.mac_addr)
-        s = p.getServiceByUUID(LED_SERVICES[4])
-        ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
-        ch_W.write(LedStripMessages.on_message())
-        p.disconnect()
+        #p = Peripheral(self.mac_addr)
+        #s = self.p.getServiceByUUID(LED_SERVICES[4])
+        #ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.ch_W.write(LedStripMessages.on_message())
+        self.p.disconnect()
         return ""
 
     def turn_off(self):
-        p = Peripheral(self.mac_addr)
-        s = p.getServiceByUUID(LED_SERVICES[4])
-        ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
-        ch_W.write(LedStripMessages.off_message())
-        p.disconnect()
+        #p = Peripheral(self.mac_addr)
+        #s = p.getServiceByUUID(LED_SERVICES[4])
+        #self.ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.ch_W.write(LedStripMessages.off_message())
+        self.p.disconnect()
 
 
 class API():
