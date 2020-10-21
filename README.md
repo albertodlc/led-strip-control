@@ -35,6 +35,13 @@ This Python script is based on the tutorials of:
 If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 
 ## Intro and setup
+
+The basic set-up of the project is:
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img1.jpg" />
+</p>
+
 ### LED strip reverse engineering
 1. A LED strip with a Bluetooth controller.
 2. A computer with ADB drivers installed.
@@ -49,11 +56,6 @@ If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 
 ### Google Assistant / IFTT
 1. A Google account and an IFTT account.
-
-<p align="center">
-    <img height="auto" width="auto" src="img/img1.jpg" />
-</p>
-
 
 ## Sniffing Bluetooth packets and reverse engineering the commands
 
