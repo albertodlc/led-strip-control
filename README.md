@@ -79,16 +79,21 @@ After defining the **API-REST** methods, we need to set the **IFTTT services**. 
 ### Tutorial
 1. We go to [IFTTT](https://ifttt.com) website and we create a new account.
 2. Now we need to **create** a new **Applet**.
+3. In the "If this" rectangle we click **add** search for Google Assistant and select it.
 
 <p align="center">
     <img height="auto" width="auto" src="img/img50.JPG" />
 </p>
 
-3. In the "If this" rectangle we click **add** search for Google Assistant and select it.
 4. Choose "Say a simple phrase" as your trigger (you can choose other option depending of the project you are working on).
-  - Fore example "Turn my lamp"
-
 <p align="center">
     <img height="auto" width="auto" src="img/img51.JPG" />
+</p>
+
+5. For example "Turn my lamp on" and other variations.
+
+<p align="center">
     <img height="auto" width="auto" src="img/img52.JPG" />  
 </p>
+
+6. Click "Create Trigger" and proceed.
