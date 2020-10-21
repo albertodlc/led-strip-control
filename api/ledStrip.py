@@ -97,6 +97,7 @@ class DeviceControl:
 
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
 
     #def show_perif_services_char(self):
     #    print("\n\tDevice:" + self.p.addr)
@@ -146,6 +147,19 @@ class API():
         dc.turn_on()
         return ""
 
+    @app.route('/led/all/on', methods=['POST'])
+    def turn_on_3():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
+        dc3 = DeviceControl(MAC_ADDR[3]);
+
+        dc.turn_on()
+        dc1.turn_on()
+        dc2.turn_on()
+        dc3.turn_on()
+        return ""
+
     @app.route('/led/mesa/off', methods=['POST'])
     def turn_off_1():
         dc = DeviceControl(MAC_ADDR[0]);
@@ -162,6 +176,20 @@ class API():
         dc = DeviceControl(MAC_ADDR[3]);
         dc.turn_off()
         return ""
+
+    @app.route('/led/all/off', methods=['POST'])
+    def turn_off_3():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
+        dc3 = DeviceControl(MAC_ADDR[3]);
+
+        dc.turn_off()
+        dc1.turn_off()
+        dc2.turn_off()
+        dc3.turn_off()
+        return ""
+
 #sd = ScanDevices()
 
 #for dev in sd.device_array:
