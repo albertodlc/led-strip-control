@@ -17,11 +17,13 @@ Also **IFTT** is used to create the Google Assistant <-> API requests.
   - [API Server](#api-server)
   - [Google Assistant / IFTTT](#google-assistant-ifttt)
 - [2. Sniffing Bluetooth packets and reverse engineering the commands](#sniffing-bluetooth-packets-and-reverse-engineering-the-commands)
+  - [Requirements](#requirements)
 - [3. Creating an API-REST service](creating-an-api-rest-service)
+  - [Requirements](#requirements)
+- [4. Google Assistant integration with the API-REST](google-assistant-integration-with-the-api-rest)
   - [Requirements](#requirements)
   - [DDNS configuration (DuckDNS)](ddns-configuration-duckdns)
   - [Port-Forwarding configuration (depends on the router model)](#port-forwarding-configuration-depends-on-the-router-model))
-
 ## Acknowledgements and resources
 
 This Python script is based on the tutorials of:
@@ -80,8 +82,8 @@ In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
 > - Wikipedia
 
 ### DDNS configuration (DuckDNS)
-1. Go to [DuckDNS](https://www.duckdns.org/) website and sign up with your Google account (or other via).
-2. The web will redirect you to the administration panel, you need to enter a name for your domain and press "add domain". The **domain** and you **public IP** will be added.
+1. Go to the [DuckDNS](https://www.duckdns.org/) website and sign up with your Google account (or other via).
+2. The web will redirect you to the administration panel, you need to enter a name for your domain and press "add domain". The **domain** and you **public IP** will be added below.
 
 <p align="center">
     <img height="auto" width="auto" src="img/img49.JPG" />  
