@@ -35,9 +35,11 @@ This Python script is based on the tutorials of:
 If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 
 ## Intro and setup
+
 <p align="center">
     <img height="auto" width="auto" src="img/img1.jpg" />
 </p>
+
 ### LED strip reverse engineering
 1. A LED strip with a Bluetooth controller.
 2. A computer with ADB drivers installed.
