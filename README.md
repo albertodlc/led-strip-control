@@ -13,7 +13,7 @@ Also **IFTT** is used to create the Google Assistant <-> API requests.
   - [API Server](#api-server)
   - [Google Assistant / IFTT](#google-assistant-iftt)
 - [2. Sniffing Bluetooth packets and reverse engineering the commands](#sniffing-bluetooth-packets-and-reverse-engineering-the-commands)
-- [3. ]
+- [3. Creating an API-REST service](creating-an-api-rest-service)
 
 ## Acknowledgements and resources
 
@@ -35,7 +35,9 @@ This Python script is based on the tutorials of:
 If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 
 ## Intro and setup
-
+<p align="center">
+    <img height="auto" width="auto" src="img/img1.jpg" />
+</p>
 ### LED strip reverse engineering
 1. A LED strip with a Bluetooth controller.
 2. A computer with ADB drivers installed.
@@ -54,7 +56,8 @@ If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 ## Sniffing Bluetooth packets and reverse engineering the commands
 
 
-## Creating an API-REST service
-
+## Creating an API-REST service ()
+### Requirements
 
 ## Google Assistant integration with the API-REST
+### Requirements
