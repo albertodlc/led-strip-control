@@ -6,42 +6,47 @@ Also **IFTT** is used to create the Google Assistant <-> API requests.
 
 ## Contents
 
-- [Acknowledgements and resources](#acknowledgements-and-resources)
+- [Acknowledgements And Resources](#acknowledgements-and-resources)
 - [Disclaimer](#disclaimer)
 - [1. Intro and Setup](#intro-and-Setup)
-  - [Requirements](#requirements)
-    - [LED strip reverse engineering](#led-strip-reverse-engineering)
-
+  - [LED Strip Reverse Engineering](#led-strip-reverse-engineering)
+  - [API Server](#api-server)
+  - [Google Assistant / IFTT](#google-assistant-iftt)
+- [2. ]()
 ## Acknowledgements and resources
 
 This Python script is based on the tutorials of:
   - **Led strip with Bluetooth Control**
-    - [Reddit](https://www.reddit.com/r/homeassistant/comments/gnjqlp/reverse_engineering_bluetooth_led_strip_light/) : Reverse engineering of a Bluetooth LED strip - I 
-    - Reverse engineering of a Bluetooth LED strip - II [Blog](http://nilhcem.com/iot/reverse-engineering-bluetooth-led-name-badge)
-    - Reverse engineering of a Bluetooth LED strip - III [Medium](https://medium.com/@urish/reverse-engineering-a-bluetooth-lightbulb-56580fcb7546)
+    - [Reddit](https://www.reddit.com/r/homeassistant/comments/gnjqlp/reverse_engineering_bluetooth_led_strip_light/) : Reverse engineering of a Bluetooth LED strip - I
+    - [Blog](http://nilhcem.com/iot/reverse-engineering-bluetooth-led-name-badge) : Reverse engineering of a Bluetooth LED strip - II
+    - [Medium](https://medium.com/@urish/reverse-engineering-a-bluetooth-lightbulb-56580fcb7546) : Reverse engineering of a Bluetooth LED strip - III
   - **Server/API**
-    - API creation - I [Medium](https://medium.com/@sidhantpanda/raspberry-pi-home-automation-with-google-assistant-integration-part-1-software-71b3b8904205)
-    - API creation - II [Medium](https://medium.com/sysf/introduction-to-iot-with-raspberry-pi-and-node-js-using-rgb-led-lights-77f4750a5ea9)
-    - API creation - III [Blog](https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
+    - [Medium](https://medium.com/@sidhantpanda/raspberry-pi-home-automation-with-google-assistant-integration-part-1-software-71b3b8904205) : API creation - I
+    - [Medium](https://medium.com/sysf/introduction-to-iot-with-raspberry-pi-and-node-js-using-rgb-led-lights-77f4750a5ea9) : API creation - II
+    - [Blog](https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask) : API creation - III
   - **Google Assistant**
-    - Google Assistant implementation - I [Intructables](https://www.instructables.com/Google-Home-Raspberry-Pi-Power-Strip/)
-    - Google Assistant implementation - II [Programminghistorian](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask#installing-python-and-flask)
+    - [Intructables](https://www.instructables.com/Google-Home-Raspberry-Pi-Power-Strip/) : Google Assistant implementation - I
+    - [Programminghistorian](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask#installing-python-and-flask) : Google Assistant implementation - II
 
 ## **Disclaimer:**
-**You can't brick your RPI or strips using this methods, but I don't take responsibility for any damage caused.**  
+**You can't brick your RPI or strips using this method, but I don't take responsibility for any damage caused.**  
 If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 
 ## Intro and setup
 
-### Requirements
-#### LED strip reverse engineering
-1. A computer with ADB drivers installed
-2. A mobile phone with Android
-3. An USB type C cable (or similar)
+### LED strip reverse engineering
+1. A LED strip with a Bluetooth controller.
+2. A computer with ADB drivers installed.
+3. A mobile phone with Android (and the official App of the LED strip).
+4. An USB type C cable (or similar).
+5. General knowledges of Wireshark and packet sniffing
 
-#### API Server
-1. A RPI with Raspbian installed
-2. An IDE (Atom or similar)
+### API Server
+1. A RPI with Raspbian installed.
+2. An IDE (Atom or similar).
+3. General knowledges of Python and API operation.
 
-#### Google Assistant / IFTT
-UNDER DEVELOPMENT
+### Google Assistant / IFTT
+1. A Google account and an IFTT account.
+
+## Sniffing Bluetooth packets and reverse engineering
