@@ -15,7 +15,7 @@ Also **IFTT** is used to create the Google Assistant <-> API requests.
 - [1. Intro and Setup](#intro-and-Setup)
   - [LED Strip Reverse Engineering](#led-strip-reverse-engineering)
   - [API Server](#api-server)
-  - [Google Assistant / IFTT](#google-assistant-iftt)
+  - [Google Assistant / IFTTT](#google-assistant-ifttt)
 - [2. Sniffing Bluetooth packets and reverse engineering the commands](#sniffing-bluetooth-packets-and-reverse-engineering-the-commands)
 - [3. Creating an API-REST service](creating-an-api-rest-service)
 
@@ -58,8 +58,8 @@ The basic set-up of the project is:
 2. An IDE (Atom or similar).
 3. General knowledges of Python and API operation.
 
-### Google Assistant / IFTT
-1. A Google account and an IFTT account.
+### Google Assistant / IFTTT
+1. A Google account and an IFTTT account.
 
 ## Sniffing Bluetooth packets and reverse engineering the commands
 ### Requirements
@@ -70,8 +70,25 @@ The basic set-up of the project is:
 
 ## Google Assistant integration with the API-REST
 ### Requirements
-After defining the API-REST methods, we need to set the IFTT services. IFTT refers to:
+After defining the **API-REST** methods, we need to set the **IFTTT services**. IFTTT refers to:
 
 
-> If This Then That (commonly known as IFTTT, /ɪft/) is a web-based service that allows users to create chains of conditional statements triggered by changes that occur within other web services such as Gmail, Facebook, Telegram, Instagram, Pinterest or Google Assistant
+> If This Then That (commonly known as IFTTT, /ɪft/) is a web-based service that allows users to create chains of conditional statements triggered by changes that occur within other web services such as Gmail, Facebook, Telegram, Instagram, Pinterest or Google Assistant.
 > - Wikipedia
+
+### Tutorial
+1. We go to [IFTTT](https://ifttt.com) website and we create a new account.
+2. Now we need to **create** a new **Applet**.
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img50.JPG" />
+</p>
+
+3. In the "If this" rectangle we click **add** search for Google Assistant and select it.
+4. Choose "Say a simple phrase" as your trigger (you can choose other option depending of the project you are working on).
+  - Fore example "Turn my lamp"
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img51.JPG" />
+    <img height="auto" width="auto" src="img/img52.JPG" />  
+</p>
