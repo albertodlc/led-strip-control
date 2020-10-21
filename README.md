@@ -77,9 +77,9 @@ After defining the **API-REST** methods, we need to set the **IFTTT services**. 
 > - Wikipedia
 
 ### Tutorial
-1. We go to [IFTTT](https://ifttt.com) website and we create a new account.
-2. Now we need to **create** a new **Applet**.
-3. In the "If this" rectangle we click **add** search for Google Assistant and select it.
+1. Go to [IFTTT](https://ifttt.com) website and create a new account.
+2. Click **create** a new **Applet**.
+3. In the "If this" rectangle click **add** and search for **Google Assistant**, select it.
 
 <p align="center">
     <img height="auto" width="auto" src="img/img50.JPG" />
@@ -90,10 +90,10 @@ After defining the **API-REST** methods, we need to set the **IFTTT services**. 
     <img height="auto" width="auto" src="img/img51.JPG" />
 </p>
 
-5. For example "Turn my lamp on" and other variations.
+5. Now choose the phrase and other variations. For example "Turn my lamp on". And the response of the assistant. After that click "Create Trigger" and proceed.
 
 <p align="center">
     <img height="auto" width="auto" src="img/img52.JPG" />  
 </p>
 
-6. Click "Create Trigger" and proceed.
+6. In the "Then that" rectangle click **add** and search for **Webhooks**, select it.
