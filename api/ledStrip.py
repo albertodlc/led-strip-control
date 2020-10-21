@@ -91,7 +91,7 @@ class DeviceControl:
 
         self.mac_addr = mac_addr
 
-        self.p = Peripheral(self.mac_addr)
+        self.p = Peripheral(self.mac_addr, "Random")
 
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
