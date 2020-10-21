@@ -148,7 +148,7 @@ dc = DeviceControl("52:14:00:00:C6:A9")
 loop = True
 while(loop):
     print("MENU \n0.-ON \n1.- OFF \n10.-EXIT ")
-    opc = input()
+    opc = int(input())
     if opc == 0:
         print("Turn on light")
         dc.turn_on()
