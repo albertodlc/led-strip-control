@@ -18,6 +18,9 @@ Also **IFTT** is used to create the Google Assistant <-> API requests.
   - [Google Assistant / IFTTT](#google-assistant-ifttt)
 - [2. Sniffing Bluetooth packets and reverse engineering the commands](#sniffing-bluetooth-packets-and-reverse-engineering-the-commands)
 - [3. Creating an API-REST service](creating-an-api-rest-service)
+  - [Requirements](#requirements)
+  - [DDNS configuration (DuckDNS)](ddns-configuration-duckdns)
+  - [Port-Forwarding configuration (depends on the router model)](#port-forwarding-configuration-depends-on-the-router-model))
 
 ## Acknowledgements and resources
 
@@ -77,7 +80,12 @@ In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
 > - Wikipedia
 
 ### DDNS configuration (DuckDNS)
+1. Go to [DuckDNS](https://www.duckdns.org/) website and sign up with your Google account (or other via).
+2. The web will redirect you to the administration panel, you need to enter a name for your domain and press "add domain". The **domain** and you **public IP** will be added.
 
+<p align="center">
+    <img height="auto" width="auto" src="img/img49.JPG" />  
+</p>
 
 ### Port-Forwarding configuration (depends on the router model)
 
