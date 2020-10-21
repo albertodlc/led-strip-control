@@ -1,5 +1,12 @@
 from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate
-import struct, time
+import struct, time, flask
+
+# Flask Web App definition
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+
+# API definition
 
 MAC_INIT = ["85:58:1B", "52:14:00"]
 
@@ -72,7 +79,6 @@ class Utils():
     def rgb_to_hex(R, G, B):
         return '{:02x}{:02x}{:02x}'.format(R, G, B)
 
-
 class DeviceControl:
     def __init__(self, mac_addr):
         # Init LED STRIP with white color
@@ -109,6 +115,7 @@ class DeviceControl:
             for ch in s.getCharacteristics():
                 print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
 
+    @app.route('/on', methods=['POST'])
     def turn_on(self):
         self.ch_W.write(LedStripMessages.on_message())
 
@@ -144,19 +151,4 @@ class DeviceControl:
 #    dc.close_connection()
 
 dc = DeviceControl("52:14:00:00:C6:A9")
-
-loop = True
-while(loop):
-    print("MENU \n0.-ON \n1.- OFF \n10.-EXIT ")
-    opc = int(input())
-    if opc == 0:
-        print("Turn on light")
-        dc.turn_on()
-    elif opc == 1:
-        print("Turn off light")
-        dc.turn_off()
-    elif opc == 10:
-        dc.close_connection()
-        loop = False
-    else:
-        print("Bad command")
+app.run()
