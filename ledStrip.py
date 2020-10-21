@@ -144,8 +144,6 @@ class DeviceControl:
 #    dc.close_connection()
 
 dc = DeviceControl("52:14:00:00:C6:A9")
-dc.turn_off()
-
 
 loop = True
 while(loop):
