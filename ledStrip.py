@@ -158,3 +158,5 @@ while(loop):
     elif opc == 10:
         dc.close_connection()
         loop = False
+    else:
+        print("Bad command")
