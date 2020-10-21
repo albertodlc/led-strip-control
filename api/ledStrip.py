@@ -119,6 +119,7 @@ class DeviceControl:
     def turn_on(self):
         self.ch_W.write(LedStripMessages.on_message())
 
+    @app.route('/off', methods=['POST'])
     def turn_off(self):
         self.ch_W.write(LedStripMessages.off_message())
 
