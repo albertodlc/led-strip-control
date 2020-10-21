@@ -136,8 +136,9 @@ crontab -e
 ```sh
 cat duck.log
 ```
->If it is KO check your Token and Domain are correct in the duck.sh script
-> DuckDNS.org
+>If it is KO check your Token and Domain are correct in the duck.sh script.
+
+> - DuckDNS.org
 
 ### Port-Forwarding configuration (depends on the router model)
 
