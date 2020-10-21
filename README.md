@@ -1,5 +1,9 @@
 # Bluetooth LED Strip control (with Google Assistant)
 
+<p align="center">
+    <img height="auto" width="auto" src="img/img0.jpg" />
+</p>
+
 This is a project that uses a **Raspberry Pi (RPI)** to control a Bluetooth LED strip via **Google Assistant**.
 The script uses **Python** to control the LED strip with the RPI and to create an API to access the script's methods.
 Also **IFTT** is used to create the Google Assistant <-> API requests.
