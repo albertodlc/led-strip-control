@@ -6,7 +6,7 @@
 
 This is a project that uses a **Raspberry Pi (RPI)** to control a Bluetooth LED strip via **Google Assistant**.
 The script uses **Python** to control the LED strip with the RPI and to create an API to access the script's methods.
-Also **IFTT** is used to create the Google Assistant <-> API requests.
+Also **IFTTT** is used to create the Google Assistant <-> API requests.
 
 ## Contents
 
@@ -88,6 +88,48 @@ In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
 <p align="center">
     <img height="auto" width="auto" src="img/img49.JPG" />  
 </p>
+
+3. Now go to [DuckDNS/install](https://www.duckdns.org/install.jsp) and select your **Operating System (OS)** and the domain you want to configure. In this case, we are going the use the RPI to run the DDNS (but as I mention before you can use OpenWRT or other OS).
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img48.JPG" />  
+</p>
+
+4. After choosing a domain, a step by step guide is deployed. In the case of the RPI:
+>if your linux install is running a crontab, then you can use a cron job to keep updated. We can see this with
+```sh
+ps -ef | grep cr[o]n
+```
+if this returns nothing - then go and read up how to install cron for your distribution of linux.
+also confirm that you have curl installed, test this by attempting to run curl
+curl
+if this returns a command not found like error - then find out how to install curl for your distribution.
+otherwise lets get started and make a directory to put your files in, move into it and make our main script
+mkdir duckdns
+cd duckdns
+vi duck.sh
+now copy this text and put it into the file (in vi you hit the i key to insert, ESC then u to undo) The example below is for the domain adlc
+if you want the configuration for a different domain, use the drop down box above
+you can pass a comma separated (no spaces) list of domains
+you can if you need to hard code an IP (best not to - leave it blank and we detect your remote ip)
+hit ESC then use use arrow keys to move the cursor x deletes, i puts you back into insert mode
+echo url="https://www.duckdns.org/update?domains=adlc&token=efba60e7-37a4-49c8-ac40-acdb74792034&ip=" | curl -k -o ~/duckdns/duck.log -K -
+now save the file (in vi hit ESC then :wq! then ENTER)
+this script will make a https request and log the output in the file duck.log
+now make the duck.sh file executeable
+chmod 700 duck.sh
+next we will be using the cron process to make the script get run every 5 minutes
+crontab -e
+copy this text and paste it at the bottom of the crontab
+*/5 * * * * ~/duckdns/duck.sh >/dev/null 2>&1
+now save the file (CTRL+o then CTRL+x)
+lets test the script
+./duck.sh
+this should simply return to a prompt
+we can also see if the last attempt was successful (OK or bad KO)
+cat duck.log
+if it is KO check your Token and Domain are correct in the duck.sh script
+> DuckDNS.org
 
 ### Port-Forwarding configuration (depends on the router model)
 
