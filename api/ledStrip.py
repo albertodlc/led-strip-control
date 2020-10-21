@@ -151,7 +151,7 @@ class API():
         return ""
 
     @app.route('/led/techo/off', methods=['POST'])
-    def turn_off_1():
+    def turn_off_2():
         dc = DeviceControl(MAC_ADDR[1]);
         dc.turn_off()
         return ""
