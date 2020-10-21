@@ -133,13 +133,13 @@ class DeviceControl:
         p.disconnect()
 
 
-def API():
+class API():
     @app.route('/led/mesa/on', methods=['POST'])
     def turn_on_1():
 
         return ""
 
-    @app.route('/on', methods=['POST'])
+    @app.route('/led/techo/on', methods=['POST'])
     def turn_on_2():
         dc = DeviceControl(MAC_ADDR[1]);
         dc.turn_on()
@@ -150,7 +150,7 @@ def API():
 
         return ""
 
-    @app.route('/off', methods=['POST'])
+    @app.route('/led/techo/off', methods=['POST'])
     def turn_off_1():
         dc = DeviceControl(MAC_ADDR[1]);
         dc.turn_off()
