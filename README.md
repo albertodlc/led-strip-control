@@ -16,7 +16,7 @@ Also **IFTT** is used to create the Google Assistant <-> API requests.
 
 This Python script is based on the tutorials of:
   - **Led strip with Bluetooth Control**
-    - [Reddit](https://www.reddit.com/r/homeassistant/comments/gnjqlp/reverse_engineering_bluetooth_led_strip_light/): Reverse engineering of a Bluetooth LED strip - I 
+    - [Reddit](https://www.reddit.com/r/homeassistant/comments/gnjqlp/reverse_engineering_bluetooth_led_strip_light/) : Reverse engineering of a Bluetooth LED strip - I 
     - Reverse engineering of a Bluetooth LED strip - II [Blog](http://nilhcem.com/iot/reverse-engineering-bluetooth-led-name-badge)
     - Reverse engineering of a Bluetooth LED strip - III [Medium](https://medium.com/@urish/reverse-engineering-a-bluetooth-lightbulb-56580fcb7546)
   - **Server/API**
