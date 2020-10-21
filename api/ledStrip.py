@@ -115,7 +115,7 @@ class DeviceControl:
     #        for ch in s.getCharacteristics():
     #            print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
 
-    @app.route('/on', methods=['GET'])
+    @app.route('/on', methods=['POST'])
     def turn_on():
         mac_addr = "52:14:00:00:C6:A9"
         p = Peripheral(mac_addr)
@@ -125,7 +125,7 @@ class DeviceControl:
         p.disconnect()
         return None
 
-    @app.route('/off', methods=['GET'])
+    @app.route('/off', methods=['POST'])
     def turn_off():
         mac_addr = "52:14:00:00:C6:A9"
         p = Peripheral(mac_addr)
