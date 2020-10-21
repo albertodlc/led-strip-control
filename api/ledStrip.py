@@ -139,7 +139,7 @@ def API():
 
         return ""
 
-    @app.route('/led/techo/on', methods=['POST'])
+    @app.route('/on', methods=['POST'])
     def turn_on_2():
         dc = DeviceControl(MAC_ADDR[1]);
         dc.turn_on()
@@ -150,7 +150,7 @@ def API():
 
         return ""
 
-    @app.route('/led/techo/off', methods=['POST'])
+    @app.route('/off', methods=['POST'])
     def turn_off_1():
         dc = DeviceControl(MAC_ADDR[1]);
         dc.turn_off()
