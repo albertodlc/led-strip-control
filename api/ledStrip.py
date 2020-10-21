@@ -123,7 +123,7 @@ class DeviceControl:
         ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         ch_W.write(LedStripMessages.on_message())
         p.disconnect()
-        
+
     @app.route('/off', methods=['POST'])
     def turn_off():
         mac_addr = "52:14:00:00:C6:A9"
@@ -138,4 +138,4 @@ class DeviceControl:
 #for dev in sd.device_array:
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
-app.run()
+app.run(host='0.0.0.0')
