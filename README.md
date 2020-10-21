@@ -22,6 +22,7 @@ Also **IFTTT** is used to create the Google Assistant <-> API requests.
   - [Requirements](#requirements)
 - [4. Google Assistant integration with the API-REST](google-assistant-integration-with-the-api-rest)
   - [Requirements](#requirements)
+  - [Static IP configuration (RPI specific)](static-ip-configuration-rpi-specific)
   - [DDNS configuration (DuckDNS)](ddns-configuration-duckdns)
   - [Port-Forwarding configuration (depends on the router model)](#port-forwarding-configuration-depends-on-the-router-model))
 ## Acknowledgements and resources
@@ -81,6 +82,9 @@ In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
 > If This Then That (commonly known as IFTTT, /ɪft/) is a web-based service that allows users to create chains of conditional statements triggered by changes that occur within other web services such as Gmail, Facebook, Telegram, Instagram, Pinterest or Google Assistant.
 > - Wikipedia
 
+### Static IP configuration (RPI specific)
+
+
 ### DDNS configuration (DuckDNS)
 1. Go to the [DuckDNS](https://www.duckdns.org/) website and sign up with your Google account (or other via).
 2. The web will redirect you to the administration panel, you need to enter a name for your domain and press "add domain". The **domain** and you **public IP** will be added below.
@@ -137,7 +141,6 @@ crontab -e
 cat duck.log
 ```
 >If it is KO check your Token and Domain are correct in the duck.sh script.
-
 > - DuckDNS.org
 
 ### Port-Forwarding configuration (depends on the router model)
