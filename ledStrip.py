@@ -76,6 +76,7 @@ class Utils():
 class DeviceControl:
     def __init__(self, mac_addr):
         # Init LED STRIP with white color
+        self.R, self.G, self.B = 255
         self.mac_addr = mac_addr
 
         self.p = Peripheral(self.mac_addr)
