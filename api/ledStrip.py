@@ -114,7 +114,7 @@ class DeviceControl:
     #    for s in self.p.getServices():
     #        for ch in s.getCharacteristics():
     #            print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
-    @staticmethod
+    @app.route('/on', methods=['POST'])
     def turn_on():
         mac_addr = "52:14:00:00:C6:A9"
         p = Peripheral(mac_addr)
@@ -122,8 +122,9 @@ class DeviceControl:
         ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         ch_W.write(LedStripMessages.on_message())
         p.disconnect()
+        return ""
 
-    @staticmethod
+    @app.route('/off', methods=['POST'])
     def turn_off():
         mac_addr = "52:14:00:00:C6:A9"
         p = Peripheral(mac_addr)
@@ -131,15 +132,7 @@ class DeviceControl:
         ch_W = s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         ch_W.write(LedStripMessages.off_message())
         p.disconnect()
-
-class API:
-    @app.route('/on', methods=['POST'])
-    def turn_on():
-        return DeviceControl.turn_on()
-    @app.route('/off', methods=['POST'])
-    def turn_off():
-        return DeviceControl.turn_off()
-
+        return ""
 #sd = ScanDevices()
 
 #for dev in sd.device_array:
