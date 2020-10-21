@@ -110,10 +110,10 @@ class DeviceControl:
                 print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
 
     def turn_on(self):
-        self.ch_W.write(LedStripMesages.on_message())
+        self.ch_W.write(LedStripMessages.on_message())
 
     def turn_off(self):
-        self.ch_W.write(LedStripMesages.off_message())
+        self.ch_W.write(LedStripMessages.off_message())
 
     def turn_color(self, R, G, B):
         self.R = R
@@ -149,6 +149,7 @@ dc.close_connection()
 
 loop = True
 while(loop):
+    print("MENU 0.- ON 1.- OFF")
     opc = input()
     if opc == 0:
         print("Turn on light")
