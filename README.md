@@ -4,9 +4,28 @@
     <img height="auto" width="auto" src="img/img0.jpg" />
 </p>
 
-This is a project that uses a **Raspberry Pi (RPI)** to control a Bluetooth LED strip via **Google Assistant**.
-The script uses **Python** to control the LED strip with the RPI and to create an API to access the script's methods.
-Also **IFTTT** is used to create the Google Assistant <-> API requests.
+Searching the Internet lead me to a few cheap LED strips from China (thank you Aliexpress) for under 1€ the meter. The strip include 30 LEDs, the Bluetooth controller and a 5v power supply (an USB connector).
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img01.jpg" />
+</p>
+
+As you can expect there was no documentation about the product - just a link to download the Android App (Happy Lightning).
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img02.jpg" />
+</p>
+
+A few days later I find another deal (this time on Amazon). The package include 10 meters of strip (30 LEDs/meter), Bluetooth-RF controller, RF remote control and 12v power supply. It sounded very professional, but there was *not* documentation either about the product - just the same link to the Android App.
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img04.jpg" />
+    <img height="auto" width="auto" src="img/img03.jpg" />
+</p>
+
+So I decided to investigate how to control these strips using Google Assistant, a Raspberry Pi (RPI) and my programming skills.
+
+Finally I have developed an API-REST (all using **Python**) to control the LED strip with the RPI. Also **IFTTT** is used to create the Google Assistant <-> API requests communication.
 
 ## Contents
 
@@ -55,7 +74,7 @@ The basic set-up of the project is:
 ### LED strip reverse engineering
 1. A LED strip with a Bluetooth controller.
 2. A computer with ADB drivers installed.
-3. A mobile phone with Android (and the official App of the LED strip).
+3. A mobile phone with Android (with the LED strip app and the nRF Connect app).
 4. An USB type C cable (or similar).
 5. General knowledges of Wireshark and packet sniffing
 
@@ -69,7 +88,7 @@ The basic set-up of the project is:
 
 ## Sniffing Bluetooth packets and reverse engineering the commands
 ### Requirements
-
+T
 
 ## Creating an API-REST service
 ### Requirements
@@ -161,7 +180,7 @@ cat duck.log
 ### Port-Forwarding configuration (depends on the router model)
 1. Go to the web browser and type the private IP of your router (i.e 192.168.0.1)
 2. Inside the router administration panel you have to find your firewall/port-forwards setting
-3. And create a rule allowing connection from the **WAN** to the **LAN** on the **external port 80 (http)** and destination the **RPI static IP** on the server port (generally 5000).
+3. And create a rule allowing connection from the **WAN** to the **LAN** on the **external port 80 (http)** and destination the **RPI static IP** on the **server port** (generally 5000).
 
 <p align="center">
     <img height="auto" width="auto" src="img/img47.JPG" />
