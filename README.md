@@ -27,7 +27,7 @@ Also **IFTTT** is used to create the Google Assistant <-> API requests.
   - [Port-Forwarding configuration (depends on the router model)](#port-forwarding-configuration-depends-on-the-router-model))
 ## Acknowledgements and resources
 
-This Python script is based on the tutorials of:
+This Python script is based on the tutorials from:
   - **Led strip with Bluetooth Control**
     - [Reddit](https://www.reddit.com/r/homeassistant/comments/gnjqlp/reverse_engineering_bluetooth_led_strip_light/) : Reverse engineering of a Bluetooth LED strip - I
     - [Blog](http://nilhcem.com/iot/reverse-engineering-bluetooth-led-name-badge) : Reverse engineering of a Bluetooth LED strip - II
@@ -41,7 +41,7 @@ This Python script is based on the tutorials of:
     - [Programminghistorian](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask#installing-python-and-flask) : Google Assistant implementation - II
 
 ## **Disclaimer:**
-**You can't brick your RPI or strips using this method, but I don't take responsibility for any damage caused.**  
+**In theory, it is impossible to brick your RPI or strips using this method, but I don't take responsibility for any damage caused.**  
 If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 
 ## Intro and setup
@@ -83,7 +83,23 @@ In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
 > - Wikipedia
 
 ### Static IP configuration (RPI specific)
-
+1. You need to edit the /etc/dhcpcd.conf file
+```sh
+sudo nano /etc/dhcpcd.conf
+```
+2. Inside the file uncomment and edit the following lines (you need to indicate an IP within the range of your network, the IP of your router and your favorite DNS provider's IP)
+```sh
+# Example static IP configuration:
+interface eth0
+static ip_address=192.168.0.10/24
+#static ip6_address=fd51:42f8:caae:d92e::ff/64
+static routers=192.168.0.1
+static domain_name_servers=192.168.0.1 8.8.8.8 fd51:42f8:caae:d92e::1
+```
+3. Finally save the file (CTRL+o) and reboot the System
+```sh
+sudo reboot
+```
 
 ### DDNS configuration (DuckDNS)
 1. Go to the [DuckDNS](https://www.duckdns.org/) website and sign up with your Google account (or other via).
@@ -99,7 +115,7 @@ In addition to that, you need to set the **IFTTT services**. IFTTT refers to:
     <img height="auto" width="auto" src="img/img48.JPG" />  
 </p>
 
-4. After choosing a domain, a step by step guide is deployed. In the case of the RPI:
+4. After choosing a domain, a step by step guide will be deployed. In the case of the RPI:
 >If your linux install is running a crontab, then you can use a cron job to keep updated. We can see this with
 ```sh
 ps -ef | grep cr[o]n
