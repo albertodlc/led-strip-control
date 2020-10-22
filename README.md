@@ -9,7 +9,7 @@
 Searching the Internet lead me to a few cheap LED strips from China (thank you **Aliexpress**) for under 1€/meter. The strip include 30 LEDs, the Bluetooth controller and a 5v power supply (an USB connector).
 
 <p align="center">
-    <img height="auto" width="30%" src="img/img01.jpg" />
+    <img height="auto" width="30%" src="img/img01.png" />
     <img height="auto" width="19%" src="img/img02.jpg" />
 </p>
 
@@ -18,7 +18,6 @@ As you can expect there was no documentation about the product - just a link to 
 A few days later I find another deal (this time on **Amazon**). The package include 10 meters of strip (30 LEDs/meter), Bluetooth-RF controller, RF remote control and 12v power supply. It sounded very professional, but there was **not** documentation either about the product - just the same link to the Android App.
 
 <p align="center">
-    <img height="auto" width="30%" src="img/img04.jpg" />
     <img height="auto" width="44%" src="img/img03.jpg" />
 </p>
 
@@ -73,7 +72,7 @@ The basic set-up for the project is:
 ### LED strip reverse engineering
 1. A LED strip with a Bluetooth controller.
 2. A computer with ADB drivers installed.
-3. A mobile phone with Android (with the LED strip app and the nRF Connect app).
+3. A mobile phone with Android (with the **LED strip app** and the **nRF Connect app**).
 4. An USB type C cable (or similar).
 5. General knowledges of Wireshark and packet sniffing
 
@@ -90,10 +89,15 @@ The basic set-up for the project is:
 A little bit of information about how a Bluetooth Low Energy device work:
 >In Bluetooth Low Energy, devices can perform one of two roles. A device can be either a “Central” (in this example, your phone) or a “Peripheral” (and respectively, the bulb).
 
->Bluetooth devices have **services** that correspond to one function of the device. Each service exposes variables/properties called characteristics. The characteristics represent one parameter of the service, which can be read, written or both. For example, in the Battery service above, it will have a Battery Level Characteristic, a read-only value containing 1-byte value between 0 and 100, reporting percentage of battery remaining in the device. A temperature service can have one characteristic for the temperature, and another one for the humidity, both are read-only. A smart bulb service can have one characteristic for the on/off switch (writing 0 turns it off, 1 on), and another characteristic for the brightness (0 to 100 or so), which can be either write-only or read+write.
+>Bluetooth devices have **services** that correspond to one function of the device. Each service exposes variables/properties called **characteristics**. The characteristics represent one parameter of the service, which can be read, written or both. For example, in the Battery service above, it will have a Battery Level Characteristic, a read-only value containing 1-byte value between 0 and 100, reporting percentage of battery remaining in the device. A temperature service can have one characteristic for the temperature, and another one for the humidity, both are read-only. A smart bulb service can have one characteristic for the on/off switch (writing 0 turns it off, 1 on), and another characteristic for the brightness (0 to 100 or so), which can be either write-only or read+write.
 
 >Peripherals periodically advertise which services they have (usually once per second or so). Centrals (such as your phone) see those advertisements, and can initiate a connection with any peripheral around them, and start reading/writing from the characteristics exposed by its services. Each service and characteristic is identified by a unique 16-bit or 128-bit number, such as `ff05` (16bit) or `00000000–0000–1000–8000–00805F9B34FB` (128bit). 16bits are reserved for standard services and characteristics, such as the Battery Level service mentioned before, and are defined by the Bluetooth SIG Group. Nevertheless, many consumer devices like to use them for their own purposes.
 > - Uri Shaked/Medium.com
+
+### Enable USB debugging on your Android device and Bluetooth HCI Snoop Mode
+
+
+### Analyzing the btsnoop_hci.log with Wireshark
 
 
 
