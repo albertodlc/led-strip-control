@@ -141,12 +141,13 @@ Probably you have to accept the conection in yout mobile phone (to grant permiss
 
 6. Now you have to look for changes on the Hexadecimal message. In my case, for this Bluetooth controller:
 
-```text
-02 03 00 0e 00 0a 00 04 00 12 28 00 56 **00** **ed** **ff** 00 f0 AA
-```
+| Commom Part                         | Value                 |
+| ----------------------------------- |:---------------------:|
+| 02 03 00 0e 00 0a 00 04 00 12 28 00 |  56 **00 ed ff** 00 f0 AA |
+
 or
 ```text
-02 03 00 0e 00 0a 00 04 00 12 28 00 56 **RR** **GG** **BB** 00 f0 AA
+02 03 00 0e 00 0a 00 04 00 12 28 00 56 RR GG BB 00 f0 AA
 ```
 With Wireshark you can see that those messages use the characteristic 0xFFD9 (associated to 0xFFD5 service). Changing those values set an specific color (you can test this with the **nRF Connect app**).
 
