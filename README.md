@@ -132,8 +132,8 @@ A little bit of information about how a Bluetooth Low Energy device work:
 ```
 Probably you have to accept the conection in yout mobile phone (to grant permission to the PC).
 
-4. After a few minutes a .zip file will be created in the directory, unzip it and move to the directory `\data\misc\bluetooth` there you can find the .log file
-5. Open the file with Wireshark and filter the captured messages (the src and dst field are good choices)
+4. After a few minutes a .zip file will be created in the directory, unzip it and move to the directory `\data\misc\bluetooth` there you can find the **.log file**.
+5. Open the file with **Wireshark** and filter the captured messages (the src and dst field are good choices)
 
 <p align="center">
     <img height="auto" width="auto" src="img/img04.JPG" />
@@ -141,15 +141,12 @@ Probably you have to accept the conection in yout mobile phone (to grant permiss
 
 6. Now you have to look for changes on the Hexadecimal message. In my case, for this Bluetooth controller:
 
-| Commom Part                         | Value                 |
-| ----------------------------------- |:---------------------:|
-| 02 03 00 0e 00 0a 00 04 00 12 28 00 |  56 **00 ed ff** 00 f0 AA |
+| Commom Part                         | Value                    |
+| ----------------------------------- |:------------------------:|
+| 02 03 00 0e 00 0a 00 04 00 12 28 00 | 56 **00 ED FF** 00 f0 AA |
+| 02 03 00 0e 00 0a 00 04 00 12 28 00 | 56 **RR GG BB** 00 f0 AA
 
-or
-```text
-02 03 00 0e 00 0a 00 04 00 12 28 00 56 RR GG BB 00 f0 AA
-```
-With Wireshark you can see that those messages use the characteristic 0xFFD9 (associated to 0xFFD5 service). Changing those values set an specific color (you can test this with the **nRF Connect app**).
+With Wireshark you can see that those messages use the characteristic **0xFFD9** (associated to **0xFFD5** service). Now changing the marked values (RR, GG, BB) set an specific color (you can test this with the **nRF Connect app**).
 
 <p align="center">
     <img height="auto" width="auto" src="img/img05.JPG" />
