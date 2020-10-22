@@ -34,6 +34,8 @@ Finally I have developed an API-REST (over **Python**) to control the LED strip 
   - [Analyzing the btsnoop_hci.log with Wireshark](#led-strip-control#analyzing-the-btsnoop_hcilog-with-wireshark)
 - [3. Creating an API-REST service](creating-an-api-rest-service)
   - [Requirements](#requirements-1)
+  - [RPI Bluetooth library (Bluepy)](#led-strip-control#rpi-bluetooth-library-bluepy)
+  - [API definition (Flask)](#api-definition-flask)
 - [4. Google Assistant integration with the API-REST](google-assistant-integration-with-the-api-rest)
   - [Requirements](#requirements-2)
   - [Static IP configuration (RPI specific)](static-ip-configuration-rpi-specific)
@@ -166,7 +168,6 @@ A few codes for this specific controller are:
 After obtaining the commands you need to configure [Bluepy](https://ianharvey.github.io/bluepy-doc/) and [Flask](https://flask.palletsprojects.com/en/1.1.x/).
 
 ### RPI Bluetooth library (Bluepy)
-
 First you need to import the library
 
 ```python
