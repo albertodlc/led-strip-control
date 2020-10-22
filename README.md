@@ -163,6 +163,128 @@ A few codes for this specific controller are:
 
 ## Creating an API-REST service
 ### Requirements
+After obtaining the commands you need to configure [Bluepy](https://ianharvey.github.io/bluepy-doc/) and [Flask](https://flask.palletsprojects.com/en/1.1.x/).
+
+### RPI Bluetooth library (Bluepy)
+
+First you need to import the library
+
+```python
+from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate
+```
+
+And create a class to control the BLE devices
+```python
+class DeviceControl:
+    def __init__(self, mac_addr):
+        # Init LED STRIP with white color
+        self.R = 255
+        self.G = 255
+        self.B = 255
+
+        self.mac_addr = mac_addr
+
+        self.p = Peripheral(self.mac_addr)
+
+        self.s = self.p.getServiceByUUID(LED_SERVICES[4])
+        self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
+
+    def turn_on(self):
+        self.ch_W.write(LedStripMessages.on_message())
+        self.p.disconnect()
+        return ""
+
+    def turn_off(self):
+        self.ch_W.write(LedStripMessages.off_message())
+        self.p.disconnect()
+```
+
+### API definition (Flask)
+First you need to import the library
+
+```python
+import struct, time, flask
+```
+Define a server
+
+```python
+# Flask Web App definition
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+```
+
+And create a class to define the API
+
+```python
+class API():
+    @app.route('/led/mesa/on', methods=['POST'])
+    def turn_on_1():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
+
+        dc.turn_on()
+        dc1.turn_on()
+        dc2.turn_on()
+        return ""
+
+    @app.route('/led/techo/on', methods=['POST'])
+    def turn_on_2():
+        dc = DeviceControl(MAC_ADDR[3]);
+        dc.turn_on()
+        return ""
+
+    @app.route('/led/all/on', methods=['POST'])
+    def turn_on_3():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
+        dc3 = DeviceControl(MAC_ADDR[3]);
+
+        dc.turn_on()
+        dc1.turn_on()
+        dc2.turn_on()
+        dc3.turn_on()
+        return ""
+
+    @app.route('/led/mesa/off', methods=['POST'])
+    def turn_off_1():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
+
+        dc.turn_off()
+        dc1.turn_off()
+        dc2.turn_off()
+        return ""
+
+    @app.route('/led/techo/off', methods=['POST'])
+    def turn_off_2():
+        dc = DeviceControl(MAC_ADDR[3]);
+        dc.turn_off()
+        return ""
+
+    @app.route('/led/all/off', methods=['POST'])
+    def turn_off_3():
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
+        dc3 = DeviceControl(MAC_ADDR[3]);
+
+        dc.turn_off()
+        dc1.turn_off()
+        dc2.turn_off()
+        dc3.turn_off()
+        return ""
+```
+
+And finally run the server
+
+```python
+app.run(host='0.0.0.0')
+```
 
 ## Google Assistant integration with the API-REST
 ### Requirements
