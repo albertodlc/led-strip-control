@@ -87,11 +87,12 @@ The basic set-up for the project is:
 
 ## Sniffing Bluetooth packets and reverse engineering the commands
 ### Requirements
-A little bit about how a Bluetooth Low Energy device work:
+A little bit of information about how a Bluetooth Low Energy device work:
 >In Bluetooth Low Energy, devices can perform one of two roles. A device can be either a “Central” (in this example, your phone) or a “Peripheral” (and respectively, the bulb).
-Bluetooth devices have **services** that correspond to one function of the device. Each service exposes variables/properties called characteristics. The characteristics represent one parameter of the service, which can be read, written or both.
-For example, in the Battery service above, it will have a Battery Level Characteristic, a read-only value containing 1-byte value between 0 and 100, reporting percentage of battery remaining in the device.
-A temperature service can have one characteristic for the temperature, and another one for the humidity, both are read-only. A smart bulb service can have one characteristic for the on/off switch (writing 0 turns it off, 1 on), and another characteristic for the brightness (0 to 100 or so), which can be either write-only or read+write.
+
+>Bluetooth devices have **services** that correspond to one function of the device. Each service exposes variables/properties called characteristics. The characteristics represent one parameter of the service, which can be read, written or both. For example, in the Battery service above, it will have a Battery Level Characteristic, a read-only value containing 1-byte value between 0 and 100, reporting percentage of battery remaining in the device. A temperature service can have one characteristic for the temperature, and another one for the humidity, both are read-only. A smart bulb service can have one characteristic for the on/off switch (writing 0 turns it off, 1 on), and another characteristic for the brightness (0 to 100 or so), which can be either write-only or read+write.
+
+>Peripherals periodically advertise which services they have (usually once per second or so). Centrals (such as your phone) see those advertisements, and can initiate a connection with any peripheral around them, and start reading/writing from the characteristics exposed by its services. Each service and characteristic is identified by a unique 16-bit or 128-bit number, such as `ff05` (16bit) or `00000000–0000–1000–8000–00805F9B34FB` (128bit). 16bits are reserved for standard services and characteristics, such as the Battery Level service mentioned before, and are defined by the Bluetooth SIG Group. Nevertheless, many consumer devices like to use them for their own purposes.
 > - Uri Shaked/Medium.com
 
 
