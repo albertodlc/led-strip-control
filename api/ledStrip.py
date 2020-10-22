@@ -128,6 +128,18 @@ class DeviceControl:
         self.ch_W.write(LedStripMessages.off_message())
         self.p.disconnect()
 
+    def modify_intensity(self, intensity):
+        if intensity > 1.0:
+            intensity = 1.0
+        elif intensity < 0.0:
+            intensity = 0.0
+
+        self.R = int(self.R*intensity)
+        self.G = int(self.G*intensity)
+        self.B = int(self.B*intensity)
+
+        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B)
+        self.p.disconnect()
 
 class API():
     @app.route('/led/mesa/on', methods=['POST'])
@@ -190,6 +202,18 @@ class API():
         dc3.turn_off()
         return ""
 
+    @app.route('/led/all/intensity?<int:intensity>', methods=['POST'])
+    def modify_intensity(intensity):
+        intensity_f = intensity/100;
+        dc = DeviceControl(MAC_ADDR[0]);
+        dc1 = DeviceControl(MAC_ADDR[1]);
+        dc2 = DeviceControl(MAC_ADDR[2]);
+        dc3 = DeviceControl(MAC_ADDR[3]);
+
+        dc.modify_intensity(intensity_f)
+        dc1.modify_intensity(intensity_f)
+        dc2.modify_intensity(intensity_f)
+        dc3.modify_intensity(intensity_f)
 #sd = ScanDevices()
 
 #for dev in sd.device_array:
