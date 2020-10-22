@@ -6,17 +6,15 @@
 
 ## Background
 
-Searching the Internet lead me to a few cheap LED strips from China (thank you **Aliexpress**) for under 1€/meter. The strip include 30 LEDs, the Bluetooth controller and a 5v power supply (an USB connector).
+Searching the Internet lead me to a few cheap LED strips from China (thank you **Aliexpress**) for under 1€/meter. The strip include 30 LEDs, the Bluetooth controller and a 5v power supply (an USB connector). As you can expect there was no documentation about the product - just a link to download the Android App (Happy Lightning).
+
+A few days later I find another deal (this time on **Amazon**). The package include 10 meters of strip (30 LEDs/meter), Bluetooth-RF controller, RF remote control and 12v power supply. It sounded very professional, but there was **not** documentation either about the product - just the same link to the Android App.
 
 <p align="center">
     <img height="auto" width="30%" src="img/img03.jpg" />
     <img height="auto" width="30%" src="img/img01.png" />
-    <img height="auto" width="30%" src="img/img02.jpg" />
+    <img height="auto" width="25%" src="img/img02.jpg" />
 </p>
-
-As you can expect there was no documentation about the product - just a link to download the Android App (Happy Lightning).
-
-A few days later I find another deal (this time on **Amazon**). The package include 10 meters of strip (30 LEDs/meter), Bluetooth-RF controller, RF remote control and 12v power supply. It sounded very professional, but there was **not** documentation either about the product - just the same link to the Android App.
 
 So I decided to investigate how to control these strips using Google Assistant, a Raspberry Pi (RPI) and my programming skills.
 
