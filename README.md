@@ -4,11 +4,13 @@
     <img height="auto" width="auto" src="img/img0.jpg" />
 </p>
 
+## Background
+
 Searching the Internet lead me to a few cheap LED strips from China (thank you Aliexpress) for under 1€ the meter. The strip include 30 LEDs, the Bluetooth controller and a 5v power supply (an USB connector).
 
 <p align="center">
     <img height="auto" width="30%" src="img/img01.jpg" />
-    <img height="auto" width="30%" src="img/img02.jpg" />
+    <img height="auto" width="20%" src="img/img02.jpg" />
 </p>
 
 As you can expect there was no documentation about the product - just a link to download the Android App (Happy Lightning).
@@ -17,7 +19,7 @@ A few days later I find another deal (this time on Amazon). The package include 
 
 <p align="center">
     <img height="auto" width="30%" src="img/img04.jpg" />
-    <img height="auto" width="30%" src="img/img03.jpg" />
+    <img height="auto" width="40%" src="img/img03.jpg" />
 </p>
 
 So I decided to investigate how to control these strips using Google Assistant, a Raspberry Pi (RPI) and my programming skills.
