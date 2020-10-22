@@ -10,7 +10,7 @@ Searching the Internet lead me to a few cheap LED strips from China (thank you A
 
 <p align="center">
     <img height="auto" width="30%" src="img/img01.jpg" />
-    <img height="auto" width="18%" src="img/img02.jpg" />
+    <img height="auto" width="19%" src="img/img02.jpg" />
 </p>
 
 As you can expect there was no documentation about the product - just a link to download the Android App (Happy Lightning).
@@ -19,7 +19,7 @@ A few days later I find another deal (this time on Amazon). The package include 
 
 <p align="center">
     <img height="auto" width="30%" src="img/img04.jpg" />
-    <img height="auto" width="45%" src="img/img03.jpg" />
+    <img height="auto" width="44%" src="img/img03.jpg" />
 </p>
 
 So I decided to investigate how to control these strips using Google Assistant, a Raspberry Pi (RPI) and my programming skills.
