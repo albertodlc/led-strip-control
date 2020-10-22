@@ -6,7 +6,7 @@
 
 ## Background
 
-Searching the Internet lead me to a few cheap LED strips from China (thank you Aliexpress) for under 1€/meter. The strip include 30 LEDs, the Bluetooth controller and a 5v power supply (an USB connector).
+Searching the Internet lead me to a few cheap LED strips from China (thank you **Aliexpress**) for under 1€/meter. The strip include 30 LEDs, the Bluetooth controller and a 5v power supply (an USB connector).
 
 <p align="center">
     <img height="auto" width="30%" src="img/img01.jpg" />
@@ -15,7 +15,7 @@ Searching the Internet lead me to a few cheap LED strips from China (thank you A
 
 As you can expect there was no documentation about the product - just a link to download the Android App (Happy Lightning).
 
-A few days later I find another deal (this time on Amazon). The package include 10 meters of strip (30 LEDs/meter), Bluetooth-RF controller, RF remote control and 12v power supply. It sounded very professional, but there was **not** documentation either about the product - just the same link to the Android App.
+A few days later I find another deal (this time on **Amazon**). The package include 10 meters of strip (30 LEDs/meter), Bluetooth-RF controller, RF remote control and 12v power supply. It sounded very professional, but there was **not** documentation either about the product - just the same link to the Android App.
 
 <p align="center">
     <img height="auto" width="30%" src="img/img04.jpg" />
@@ -24,7 +24,7 @@ A few days later I find another deal (this time on Amazon). The package include 
 
 So I decided to investigate how to control these strips using Google Assistant, a Raspberry Pi (RPI) and my programming skills.
 
-Finally I have developed an API-REST (all using **Python**) to control the LED strip with the RPI. Also **IFTTT** is used to create the Google Assistant <-> API requests communication.
+Finally I have developed an API-REST (over **Python**) to control the LED strip with a RPI. Also **IFTTT** is used to create the Google Assistant <-> API requests communication.
 
 ## Contents
 
@@ -45,7 +45,7 @@ Finally I have developed an API-REST (all using **Python**) to control the LED s
   - [Port-Forwarding configuration (depends on the router model)](#port-forwarding-configuration-depends-on-the-router-model))
 ## Acknowledgements and resources
 
-This Python script is based on the tutorials from:
+The information of this guide is based on the tutorials from:
   - **Led strip with Bluetooth Control**
     - [Reddit](https://www.reddit.com/r/homeassistant/comments/gnjqlp/reverse_engineering_bluetooth_led_strip_light/) : Reverse engineering of a Bluetooth LED strip - I
     - [Blog](http://nilhcem.com/iot/reverse-engineering-bluetooth-led-name-badge) : Reverse engineering of a Bluetooth LED strip - II
@@ -64,7 +64,7 @@ If you find any mistakes in this tutorial, _please_ submit a PR 👍🏻
 
 ## Intro and setup
 
-The basic set-up of the project is:
+The basic set-up for the project is:
 
 <p align="center">
     <img height="auto" width="auto" src="img/img1.jpg" />
@@ -87,7 +87,14 @@ The basic set-up of the project is:
 
 ## Sniffing Bluetooth packets and reverse engineering the commands
 ### Requirements
-T
+A little bit about how a Bluetooth Low Energy device work:
+>In Bluetooth Low Energy, devices can perform one of two roles. A device can be either a “Central” (in this example, your phone) or a “Peripheral” (and respectively, the bulb).
+Bluetooth devices have **services** that correspond to one function of the device. Each service exposes variables/properties called characteristics. The characteristics represent one parameter of the service, which can be read, written or both.
+For example, in the Battery service above, it will have a Battery Level Characteristic, a read-only value containing 1-byte value between 0 and 100, reporting percentage of battery remaining in the device.
+A temperature service can have one characteristic for the temperature, and another one for the humidity, both are read-only. A smart bulb service can have one characteristic for the on/off switch (writing 0 turns it off, 1 on), and another characteristic for the brightness (0 to 100 or so), which can be either write-only or read+write.
+> - Uri Shaked/Medium.com
+
+
 
 ## Creating an API-REST service
 ### Requirements
