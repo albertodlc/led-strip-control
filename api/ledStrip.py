@@ -1,5 +1,6 @@
 from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate
 import struct, time, flask
+from flask import request
 
 # Flask Web App definition
 
@@ -203,9 +204,9 @@ class API():
         dc3.turn_off()
         return ""
 
-    @app.route('/led/all/intensity?<int:intensity>', methods=['POST'])
-    def modify_intensity(intensity):
-        intensity_f = intensity/100;
+    @app.route('/led/all/intensity', methods=['POST'])
+    def modify_intensity():
+        intensity_f = request.args.get("intensity")/100
         dc = DeviceControl(MAC_ADDR[0]);
         dc1 = DeviceControl(MAC_ADDR[1]);
         dc2 = DeviceControl(MAC_ADDR[2]);
