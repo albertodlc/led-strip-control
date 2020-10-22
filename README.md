@@ -89,7 +89,7 @@ A little bit of information about how a Bluetooth Low Energy device work:
 >Peripherals periodically advertise which services they have (usually once per second or so). Centrals (such as your phone) see those advertisements, and can initiate a connection with any peripheral around them, and start reading/writing from the characteristics exposed by its services. Each service and characteristic is identified by a unique 16-bit or 128-bit number, such as `ff05` (16bit) or `00000000–0000–1000–8000–00805F9B34FB` (128bit). 16bits are reserved for standard services and characteristics, such as the Battery Level service mentioned before, and are defined by the Bluetooth SIG Group. Nevertheless, many consumer devices like to use them for their own purposes.
 > - Uri Shaked/Medium.com
 
- Some services and characteristics (not all are available) of the Bluetooth Controller are:
+ Some services and characteristics (not all are available) of my Bluetooth Controller are:
 - **0x1800 (Generic Access)**
   - 0x2A00 (Device Name)
   - 0x2A01 (Appearance)
@@ -131,6 +131,7 @@ A little bit of information about how a Bluetooth Low Energy device work:
 ./adb.exe bugreport > BUG_REPORT.txt
 ```
 Probably you have to accept the conection in yout mobile phone (to grant permission to the PC).
+
 4. After a few minutes a .zip file will be created in the directory, unzip it and move to the directory `\data\misc\bluetooth` there you can find the .log file
 5. Open the file with Wireshark and filter the captured messages (the src and dst field are good choices)
 
@@ -147,7 +148,7 @@ or
 ```text
 02 03 00 0e 00 0a 00 04 00 12 28 00 56 **RR GG BB** 00 f0 AA
 ```
-In Wireshark you can see that those messages use the characteristic 0xFFD9 (associated to 0xFFD5 service). Changing those values set an specific color (you can test this with the **nRF Connect app**).
+With Wireshark you can see that those messages use the characteristic 0xFFD9 (associated to 0xFFD5 service). Changing those values set an specific color (you can test this with the **nRF Connect app**).
 
 <p align="center">
     <img height="auto" width="auto" src="img/img05.JPG" />
