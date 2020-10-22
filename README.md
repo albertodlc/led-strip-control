@@ -164,7 +164,7 @@ cat duck.log
 3. And create a rule allowing connection from the **WAN** to the **LAN** on the **external port 80 (http)** and destination the **RPI static IP** on the server port (generally 5000).
 
 <p align="center">
-    <img height="auto" width="auto" src="img/img50.JPG" />
+    <img height="auto" width="auto" src="img/img47.JPG" />
 </p>
 
 
