@@ -92,7 +92,6 @@ sudo nano /etc/dhcpcd.conf
 # Example static IP configuration:
 interface eth0
 static ip_address=192.168.0.10/24
-#static ip6_address=fd51:42f8:caae:d92e::ff/64
 static routers=192.168.0.1
 static domain_name_servers=192.168.0.1 8.8.8.8 fd51:42f8:caae:d92e::1
 ```
@@ -160,6 +159,13 @@ cat duck.log
 > - DuckDNS.org
 
 ### Port-Forwarding configuration (depends on the router model)
+1. Go to the web browser and type the private IP of your router (i.e 192.168.0.1)
+2. Inside the router administration panel you have to find your firewall/port-forwards setting
+3. And create a rule allowing connection from the **WAN** to the **LAN** on the **external port 80 (http)** and destination the **RPI static IP** on the server port (generally 5000).
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img50.JPG" />
+</p>
 
 
 ### IFTTT Configuration
