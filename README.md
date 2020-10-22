@@ -12,7 +12,7 @@ A few days later I find another deal (this time on **Amazon**). The package incl
 
 <p align="center">
     <img height="auto" width="30%" src="img/img03.jpg" />
-    <img height="auto" width="30%" src="img/img01.png" />
+    <img height="auto" width="35%" src="img/img01.png" />
     <img height="auto" width="25%" src="img/img02.jpg" />
 </p>
 
@@ -89,12 +89,75 @@ A little bit of information about how a Bluetooth Low Energy device work:
 >Peripherals periodically advertise which services they have (usually once per second or so). Centrals (such as your phone) see those advertisements, and can initiate a connection with any peripheral around them, and start reading/writing from the characteristics exposed by its services. Each service and characteristic is identified by a unique 16-bit or 128-bit number, such as `ff05` (16bit) or `00000000–0000–1000–8000–00805F9B34FB` (128bit). 16bits are reserved for standard services and characteristics, such as the Battery Level service mentioned before, and are defined by the Bluetooth SIG Group. Nevertheless, many consumer devices like to use them for their own purposes.
 > - Uri Shaked/Medium.com
 
+ Some services and characteristics (not all are available) of the Bluetooth Controller are:
+- **0x1800 (Generic Access)**
+  - 0x2A00 (Device Name)
+  - 0x2A01 (Appearance)
+  - 0x2A02 (Peripheral Privacy Flag)
+- **0x1801 (Generic Attribute)**
+  - 0x2A05 (Service Changed)
+- **0x180A (Generic Information)**
+  - 0x2A29 (Manufacturer Name String) --> Beken
+  - 0x2A24 (Model Number String)
+  - 0x2A25 (Serial Number String)
+  - 0x2A26 (Firmware Revision String)
+  - 0x2A27 (Hardware Revision String)
+  - 0x2A28 (Software Revision String)
+  - 0x2A23 (System ID)
+  - 0x2A2A (IEEE 11073-20601 Regulatory Certification)
+  - 0x2A50 (PnP ID)
+- **0xFFD5 (Unknown Service)** --> Led control service
+  - 0xFFDA (Unknown Characteristic)
+  - 0xFFD9 (Unknown Characteristic) -> LED control characteristic
+- **0xFFD0 (Unknown Service)**
+  - 0xFFD4 (Unknown Characteristic)
+  - 0xFFD1 (Unknown Characteristic)
+
 ### Enable USB debugging on your Android device and Bluetooth HCI Snoop Mode
 
+1. To enable Developer Options, open the `Settings screen`, scroll down to the bottom, and tap `About phone or About tablet`. Scroll down to the bottom of the About screen and find the Build number. Tap the `Build number` field seven times to enable **Developer Options**. Tap a few times and you’ll see a toast notification with a countdown that reads “You are now X steps way from being a developer.”
+2. Tap the Back button and you’ll see the `Developer options` menu just above the “About Phone” section in Settings. This menu is now enabled on your device—you won’t have to repeat this process again unless you perform a factory reset.
+3. To enable **USB Debugging**, you’ll need to jump into the Developer options menu, scroll down to the Debugging section, and toggle the “USB Debugging” slider.
+4. Also in the Developer options screen select `Enable Bluetooth HCI snoop log`. The log file is now enabled.
+5. Now activate the Bluetooth and use the Control App of the Strips (turn on/off a few times, change the color, etc).
 
 ### Analyzing the btsnoop_hci.log with Wireshark
 
+1. To retrieve and analyze the .log, download and unzip [ADB](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) on your computer.
+2. Open a `Powershell` terminal with superuser control (`Right-click` the PowerShell shortcut in your taskbar or Start Menu, or on your Desktop and select `Run as Administrator` to open a PowerShell window that runs with admin privileges).
+3. Move to the directory where you unzip the file (with the `cd` command) and run:
+```powershell
+./adb.exe shell dumpsys bluetooth_manager
+./adb.exe bugreport > BUG_REPORT.txt
+```
+Probably you have to accept the conection in yout mobile phone (to grant permission to the PC).
+4. After a few minutes a .zip file will be created in the directory, unzip it and move to the directory `\data\misc\bluetooth` there you can find the .log file
+5. Open the file with Wireshark and filter the captured messages (the src and dst field are good choices)
 
+<p align="center">
+    <img height="auto" width="auto" src="img/img04.JPG" />
+</p>
+
+6. Now you have to look for changes on the Hexadecimal message. In my case, for this Bluetooth controller:
+
+```text
+02 03 00 0e 00 0a 00 04 00 12 28 00 56 **00 ed ff** 00 f0 AA
+```
+or
+```text
+02 03 00 0e 00 0a 00 04 00 12 28 00 56 **RR GG BB** 00 f0 AA
+```
+In Wireshark you can see that those messages use the characteristic 0xFFD9 (associated to 0xFFD5 service). Changing those values set an specific color (you can test this with the **nRF Connect app**).
+
+<p align="center">
+    <img height="auto" width="auto" src="img/img05.JPG" />
+</p>
+
+A list of codes for this specific controller is:
+- Switch ON: CC 23 33
+- Switch OFF: CC 24 33
+- Set COLOR: 56 **RR GG BB** 00 f0 AA
+- ...
 
 ## Creating an API-REST service
 ### Requirements
