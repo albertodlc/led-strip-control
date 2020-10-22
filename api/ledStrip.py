@@ -130,11 +130,6 @@ class DeviceControl:
         self.p.disconnect()
 
     def modify_intensity(self, intensity):
-        if intensity > 1.0:
-            intensity = 1.0
-        elif intensity < 0.0:
-            intensity = 0.0
-
         self.R = int(self.R*intensity)
         self.G = int(self.G*intensity)
         self.B = int(self.B*intensity)
@@ -206,7 +201,13 @@ class API():
 
     @app.route('/led/all/intensity', methods=['POST'])
     def modify_intensity():
-        intensity_f = request.args.get("intensity")/100
+        intensity_f = int(request.args.get("intensity"))/100
+
+        if intensity_f > 1.0:
+            intensity_f = 1.0
+        elif intensity_f < 0.0:
+            intensity_f = 0.0
+
         dc = DeviceControl(MAC_ADDR[0]);
         dc1 = DeviceControl(MAC_ADDR[1]);
         dc2 = DeviceControl(MAC_ADDR[2]);
