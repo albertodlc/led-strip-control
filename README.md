@@ -144,7 +144,7 @@ Probably you have to accept the conection in yout mobile phone (to grant permiss
 | Commom Part                         | Value                    |
 | ----------------------------------- |:------------------------:|
 | 02 03 00 0e 00 0a 00 04 00 12 28 00 | 56 **00 ED FF** 00 f0 AA |
-| 02 03 00 0e 00 0a 00 04 00 12 28 00 | 56 **RR GG BB** 00 f0 AA
+| 02 03 00 0e 00 0a 00 04 00 12 28 00 | 56 **RR GG BB** 00 f0 AA |
 
 With Wireshark you can see that those messages use the characteristic **0xFFD9** (associated to **0xFFD5** service). Now changing the marked values (RR, GG, BB) set an specific color (you can test this with the **nRF Connect app**).
 
@@ -152,11 +152,12 @@ With Wireshark you can see that those messages use the characteristic **0xFFD9**
     <img height="auto" width="auto" src="img/img05.JPG" />
 </p>
 
-A list of codes for this specific controller is:
-- **Switch ON:** CC 23 33
-- **Switch OFF:** CC 24 33
-- **Set COLOR:** 56 **RR GG BB** 00 f0 AA
-- ...
+A few codes for this specific controller are:
+| Action         | Value                   |
+| -------------- |:-----------------------:|
+| **Switch ON**  | CC 23 33                |
+| **Switch OFF** | CC 24 33                |
+| **Set COLOR** | 56 **RR GG BB** 00 f0 AA |
 
 ## Creating an API-REST service
 ### Requirements
