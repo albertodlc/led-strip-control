@@ -137,9 +137,10 @@ class DeviceControl:
         self.R = int(self.R*intensity)
         self.G = int(self.G*intensity)
         self.B = int(self.B*intensity)
+        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
 
-        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B)
         self.p.disconnect()
+
 
 class API():
     @app.route('/led/mesa/on', methods=['POST'])
@@ -214,6 +215,7 @@ class API():
         dc1.modify_intensity(intensity_f)
         dc2.modify_intensity(intensity_f)
         dc3.modify_intensity(intensity_f)
+        return ""
 #sd = ScanDevices()
 
 #for dev in sd.device_array:
