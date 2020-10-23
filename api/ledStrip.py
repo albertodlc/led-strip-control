@@ -107,7 +107,7 @@ class Utils():
             led_status["R"] = 255
             led_status["G"] = 255
             led_status["B"] = 255
-            led_status["POWER"] = "on"
+            led_status["POWER"] = "off"
 
             with open(led_status["MAC"] + ".json", "w") as f:
                 json.dump(led_status, f, indent = 1)
@@ -141,7 +141,7 @@ class DeviceControl:
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
 
-        if self.led_status["POWER"] == "on":
+        if self.led_status["POWER"] == "off":
             self.turn_on()
             self.set_color(self.led_status["R"], self.led_status["G"], self.led_status["B"])
 
