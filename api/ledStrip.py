@@ -175,7 +175,7 @@ class DeviceControl:
 
         # Update status
         self.led_status["POWER"] = "on"
-        file_modification(self.led_status)
+        Utils.file_modification(self.led_status)
 
     def turn_off(self):
         # Turn OFF the light
@@ -184,7 +184,7 @@ class DeviceControl:
 
         # Update status
         self.led_status["POWER"] = "on"
-        file_modification(self.led_status)
+        Utils.file_modification(self.led_status)
 
     def modify_intensity(self, intensity):
         self.R = int(self.R*intensity)
@@ -285,5 +285,6 @@ class API():
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
 dc = DeviceControl(MAC_ADDR[0])
+dc.set_color(255, 0, 0)
 dc.turn_off()
 #app.run(host='0.0.0.0')
