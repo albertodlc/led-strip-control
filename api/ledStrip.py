@@ -100,9 +100,8 @@ class Utils():
                             "B" : 255
             }
 
-            with open(mac_addr + ".json", "w") as file:
-                json.dump(led_status, file, indent = 1)
-            file.close()
+            with open(mac_addr + ".json", "w") as f:
+                json.dump(led_status, f, indent = 1)
         finally:
             f.close()
             return led_status
