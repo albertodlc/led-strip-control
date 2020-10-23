@@ -106,10 +106,16 @@ class Utils():
             f.close()
             return led_status
 
+
 class DeviceControl:
     def __init__(self, mac_addr):
 
-        Utils.file_creation(mac_addr)
+        led_status = Utils.file_creation(mac_addr)
+
+        print(led_status("MAC"))
+        print(led_status("R"))
+        print(led_status("G"))
+        print(led_status("B"))
 
         # Init LED STRIP with white color
         self.R = 255
