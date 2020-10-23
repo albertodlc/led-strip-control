@@ -87,6 +87,7 @@ class Utils():
 
     @staticmethod
     def file_creation(mac_addr):
+        led_status = {}
         try:
             f = open(mac_addr + ".json", "r")
             led_status = json.load(f)
