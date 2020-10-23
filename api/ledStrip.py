@@ -144,6 +144,8 @@ class DeviceControl:
         if self.led_status["POWER"] == "off":
             self.ch_W.write(LedStripMessages.on_message())
             self.ch_W.write(LedStripMessages.color_message(self.led_status["R"], self.led_status["G"], self.led_status["B"]))
+            self.led_status["POWER"] = "on"
+            Utils.file_modification(self.led_status)
 
     def show_perif_services_char(self):
         print("\n\tDevice:" + self.p.addr)
