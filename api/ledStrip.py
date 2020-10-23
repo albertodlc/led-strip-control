@@ -141,11 +141,6 @@ class DeviceControl:
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
 
-        if self.led_status["POWER"] == "off":
-            self.ch_W.write(LedStripMessages.on_message())
-            self.ch_W.write(LedStripMessages.color_message(self.led_status["R"], self.led_status["G"], self.led_status["B"]))
-            self.led_status["POWER"] = "on"
-            Utils.file_modification(self.led_status)
 
     def show_perif_services_char(self):
         print("\n\tDevice:" + self.p.addr)
@@ -299,6 +294,14 @@ class API():
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
 #app.run(host='0.0.0.0')
+
+dc = DeviceControl(MAC_ADDR[0]);
+dc1 = DeviceControl(MAC_ADDR[1]);
+
+dc.turn_on()
+dc1.turn_on()
+
+input()
 
 dc = DeviceControl(MAC_ADDR[0]);
 dc1 = DeviceControl(MAC_ADDR[1]);
