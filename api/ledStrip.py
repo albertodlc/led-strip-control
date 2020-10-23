@@ -141,7 +141,7 @@ class DeviceControl:
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
 
-        if self.led_status["POWER"] == "on":
+        if self.led_status["POWER"] == "off":
             self.turn_on()
             self.set_color(self.led_status["R"], self.led_status["G"], self.led_status["B"])
 
