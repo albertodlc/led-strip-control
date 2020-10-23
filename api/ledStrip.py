@@ -107,7 +107,7 @@ class Utils():
             led_status["R"] = 255
             led_status["G"] = 255
             led_status["B"] = 255
-            led_status["POWER"] = "off"
+            led_status["POWER"] = "on"
 
             with open(led_status["MAC"] + ".json", "w") as f:
                 json.dump(led_status, f, indent = 1)
@@ -134,7 +134,7 @@ class Utils():
 
 class DeviceControl:
     def __init__(self, mac_addr):
-        # Save the status of the LED
+        # Save/Load the status of the LED
         self.led_status = Utils.file_creation(mac_addr)
 
         self.p = Peripheral(self.led_status["MAC"])
@@ -143,7 +143,7 @@ class DeviceControl:
 
         if self.led_status["POWER"] == "on":
             self.turn_on()
-            self.set_color()
+            self.set_color(self.led_status["R"], self.led_status["G"], self.led_status["B"])
 
     def show_perif_services_char(self):
         print("\n\tDevice:" + self.p.addr)
