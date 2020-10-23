@@ -303,5 +303,5 @@ class API():
 dc = DeviceControl(MAC_ADDR[0]);
 dc1 = DeviceControl(MAC_ADDR[1]);
 
-dc.turn_on()
-dc1.turn_on()
+dc.turn_off()
+dc1.turn_off()
