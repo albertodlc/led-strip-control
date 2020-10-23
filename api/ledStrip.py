@@ -167,22 +167,26 @@ class DeviceControl:
                 print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
 
     def turn_on(self):
-        # Turn ON the light
-        self.ch_W.write(LedStripMessages.on_message())
-        self.p.disconnect()
+        # Avoid turning on the light in case it is on
+        if self.led_status["POWER"] == "off":
+            # Turn ON the light
+            self.ch_W.write(LedStripMessages.on_message())
+            self.p.disconnect()
 
-        # Update status
-        self.led_status["POWER"] = "on"
-        Utils.file_modification(self.led_status)
+            # Update status
+            self.led_status["POWER"] = "on"
+            Utils.file_modification(self.led_status)
 
     def turn_off(self):
-        # Turn OFF the light
-        self.ch_W.write(LedStripMessages.off_message())
-        self.p.disconnect()
+        # Avoid turning off the light in case it is off
+        if self.led_status["POWER"] == "on":
+            # Turn OFF the light
+            self.ch_W.write(LedStripMessages.off_message())
+            self.p.disconnect()
 
-        # Update status
-        self.led_status["POWER"] = "on"
-        Utils.file_modification(self.led_status)
+            # Update status
+            self.led_status["POWER"] = "on"
+            Utils.file_modification(self.led_status)
 
     def modify_intensity(self, intensity):
         self.R = int(self.R*intensity)
@@ -193,16 +197,18 @@ class DeviceControl:
         self.p.disconnect()
 
     def set_color(self, R, G, B):
-        # SET color of the LED
-        self.ch_W.write(LedStripMessages.color_message(R, G, B))
-        self.p.disconnect()
+        # Avoid changing color of the light in case it is off
+        if self.led_status["POWER"] == "on":
+            # SET color of the LED
+            self.ch_W.write(LedStripMessages.color_message(R, G, B))
+            self.p.disconnect()
 
-        # Update status
-        self.led_status["R"] = R
-        self.led_status["G"] = G
-        self.led_status["B"] = B
+            # Update status
+            self.led_status["R"] = R
+            self.led_status["G"] = G
+            self.led_status["B"] = B
 
-        Utils.file_modification(self.led_status)
+            Utils.file_modification(self.led_status)
 
 
 class API():
