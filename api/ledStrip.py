@@ -129,8 +129,6 @@ class Utils():
         led_status_old["POWER"] = led_status["POWER"]
 
         f = open(led_status["MAC"] + ".json", "w")
-
-        led_status = json.load(f)
         json.dump(led_status_old, f, indent = 1)
         f.close()
 
