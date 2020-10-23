@@ -100,7 +100,7 @@ class Utils():
             }
 
             with open(mac_addr + ".json", "w") as file:
-                json.dump(led_status, f, indent = 1)
+                json.dump(led_status, file, indent = 1)
             file.close()
         finally:
             f.close()
