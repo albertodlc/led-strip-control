@@ -27,6 +27,14 @@ LED_SERVICES = [
 
 LED_CHARACTERISTICS = [UUID(0xFFD9)]
 
+JSON_FORMAT = {
+                "MAC": "",
+                "R" : 0,
+                "G" : 0,
+                "B" : 0,
+                "POWER" : ""
+}
+
 # Class override to handle notifications from the devices
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -87,46 +95,55 @@ class Utils():
 
     @staticmethod
     def file_creation(mac_addr):
-        led_status = {}
         try:
-            f = open(mac_addr + ".json", "r")
+            # Initilize message format
+            led_status = JSON_FORMAT
+            led_status["MAC"] = mac_addr
+
+            f = open(led_status["MAC"] + ".json", "r")
             led_status = json.load(f)
 
         except FileNotFoundError:
-            led_status = {
-                            "MAC": mac_addr,
-                            "R" : 255,
-                            "G" : 255,
-                            "B" : 255,
-                            "POWER" : "off"
-            }
+            led_status["R"] = 255
+            led_status["G"] = 255
+            led_status["B"] = 255
+            led_status["POWER"] = "off"
 
-            with open(mac_addr + ".json", "w") as f:
+            with open(led_status["MAC"] + ".json", "w") as f:
                 json.dump(led_status, f, indent = 1)
+
         finally:
             f.close()
             return led_status
 
+    @staticmethod
+    def file_modification(led_status):
+        f = open(led_status["MAC"] + ".json", "r")
+        led_status_old = json.load(f)
+        f.close()
+
+        led_status_old["R"] = led_status["R"]
+        led_status_old["G"] = led_status["G"]
+        led_status_old["B"] = led_status["B"]
+
+        led_status_old["POWER"] = led_status["POWER"]
+
+        f = open(led_status["MAC"] + ".json", "w")
+
+        led_status = json.load(f)
+        json.dump(led_status_old, f, indent = 1)
+        f.close()
 
 class DeviceControl:
     def __init__(self, mac_addr):
         # Save the status of the LED
-        led_status = Utils.file_creation(mac_addr)
+        self.led_status = Utils.file_creation(mac_addr)
 
-        # Init LED STRIP with white color
-        self.R = led_status["R"]
-        self.G = led_status["G"]
-        self.B = led_status["B"]
-
-        self.mac_addr = led_status["MAC"]
-
-        self.power = led_status["POWER"]
-
-        self.p = Peripheral(self.mac_addr)
+        self.p = Peripheral(self.led_status["MAC"])
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
 
-        if self.power == "on":
+        if self.led_status["POWER"] == "on":
             self.turn_on()
             self.set_color()
 
@@ -152,12 +169,22 @@ class DeviceControl:
                 print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
 
     def turn_on(self):
+        # Turn ON the light
         self.ch_W.write(LedStripMessages.on_message())
         self.p.disconnect()
 
+        # Update status
+        self.led_status["POWER"] = "on"
+        file_modification(self.led_status)
+
     def turn_off(self):
+        # Turn OFF the light
         self.ch_W.write(LedStripMessages.off_message())
         self.p.disconnect()
+
+        # Update status
+        self.led_status["POWER"] = "on"
+        file_modification(self.led_status)
 
     def modify_intensity(self, intensity):
         self.R = int(self.R*intensity)
@@ -258,5 +285,5 @@ class API():
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
 dc = DeviceControl(MAC_ADDR[0])
-dc.turn_on()
+dc.turn_off()
 #app.run(host='0.0.0.0')
