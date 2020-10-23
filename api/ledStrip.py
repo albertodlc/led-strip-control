@@ -97,7 +97,8 @@ class Utils():
                             "MAC": mac_addr,
                             "R" : 255,
                             "G" : 255,
-                            "B" : 255
+                            "B" : 255,
+                            "POWER" : "off"
             }
 
             with open(mac_addr + ".json", "w") as f:
@@ -109,25 +110,28 @@ class Utils():
 
 class DeviceControl:
     def __init__(self, mac_addr):
-
+        # Save the status of the LED
         led_status = Utils.file_creation(mac_addr)
 
-        print(led_status["MAC"])
-        print(led_status["R"])
-        print(led_status["G"])
-        print(led_status["B"])
-
         # Init LED STRIP with white color
-        self.R = 255
-        self.G = 255
-        self.B = 255
+        self.R = led_status["R"]
+        self.G = led_status["G"]
+        self.B = led_status["B"]
 
-        self.mac_addr = mac_addr
+        self.mac_addr = led_status["MAC"]
 
         self.p = Peripheral(self.mac_addr)
 
+        print(self.p)
+
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
+
+        print(self.s)
+
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+
+        print(self.ch_W)
+
         self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
 
     def show_perif_services_char(self):
@@ -154,7 +158,6 @@ class DeviceControl:
     def turn_on(self):
         self.ch_W.write(LedStripMessages.on_message())
         self.p.disconnect()
-        return ""
 
     def turn_off(self):
         self.ch_W.write(LedStripMessages.off_message())
