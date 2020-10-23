@@ -120,19 +120,15 @@ class DeviceControl:
 
         self.mac_addr = led_status["MAC"]
 
+        self.power = led_status["POWER"]
+
         self.p = Peripheral(self.mac_addr)
-
-        print(self.p)
-
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
-
-        print(self.s)
-
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
 
-        print(self.ch_W)
-
-        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
+        if self.power == "on":
+            self.turn_on()
+            self.set_color()
 
     def show_perif_services_char(self):
         print("\n\tDevice:" + self.p.addr)
@@ -169,6 +165,10 @@ class DeviceControl:
         self.B = int(self.B*intensity)
         self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
 
+        self.p.disconnect()
+
+    def set_color(self, R, G, B):
+        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
         self.p.disconnect()
 
 
@@ -258,4 +258,5 @@ class API():
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
 dc = DeviceControl(MAC_ADDR[0])
+dc.turn_on()
 #app.run(host='0.0.0.0')
