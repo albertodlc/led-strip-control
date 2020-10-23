@@ -1,5 +1,5 @@
 from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate
-import time, flask, json
+import time, flask, json, threading
 from flask import request
 
 # Flask Web App definition
@@ -208,103 +208,40 @@ class DeviceControl:
             Utils.file_modification(self.led_status)
 
 
+def work_1(mac):
+    dc = DeviceControl(mac);
+    dc.turn_on()
+
+def work_2(mac):
+    dc = DeviceControl(mac);
+    dc.turn_off()
+
+
 class API():
-    @app.route('/led/mesa/on', methods=['POST'])
-    def turn_on_1():
-        dc = DeviceControl(MAC_ADDR[0]);
-        dc1 = DeviceControl(MAC_ADDR[1]);
-        dc2 = DeviceControl(MAC_ADDR[2]);
-
-        dc.turn_on()
-        dc1.turn_on()
-        dc2.turn_on()
-        return ""
-
-    @app.route('/led/techo/on', methods=['POST'])
-    def turn_on_2():
-        dc = DeviceControl(MAC_ADDR[3]);
-        dc.turn_on()
-        return ""
-
     @app.route('/led/all/on', methods=['POST'])
-    def turn_on_3():
-        dc = DeviceControl(MAC_ADDR[0]);
-        dc1 = DeviceControl(MAC_ADDR[1]);
-        dc2 = DeviceControl(MAC_ADDR[2]);
-        dc3 = DeviceControl(MAC_ADDR[3]);
+    def turn_on_3():        
+        threads = list()
 
-        dc.turn_on()
-        dc1.turn_on()
-        dc2.turn_on()
-        dc3.turn_on()
-        return ""
-
-    @app.route('/led/mesa/off', methods=['POST'])
-    def turn_off_1():
-        dc = DeviceControl(MAC_ADDR[0]);
-        dc1 = DeviceControl(MAC_ADDR[1]);
-        dc2 = DeviceControl(MAC_ADDR[2]);
-
-        dc.turn_off()
-        dc1.turn_off()
-        dc2.turn_off()
-        return ""
-
-    @app.route('/led/techo/off', methods=['POST'])
-    def turn_off_2():
-        dc = DeviceControl(MAC_ADDR[3]);
-        dc.turn_off()
+        for i in range(4):
+            t = threading.Thread(target=work_1, args=(MAC_ADDR[i],))
+            threads.append(t)
+            t.start()
         return ""
 
     @app.route('/led/all/off', methods=['POST'])
     def turn_off_3():
-        dc = DeviceControl(MAC_ADDR[0]);
-        dc1 = DeviceControl(MAC_ADDR[1]);
-        dc2 = DeviceControl(MAC_ADDR[2]);
-        dc3 = DeviceControl(MAC_ADDR[3]);
+        threads = list()
 
-        dc.turn_off()
-        dc1.turn_off()
-        dc2.turn_off()
-        dc3.turn_off()
+        for i in range(4):
+            t = threading.Thread(target=work_2, args=(MAC_ADDR[i],))
+            threads.append(t)
+            t.start()
         return ""
-
-    @app.route('/led/all/intensity', methods=['POST'])
-    def modify_intensity():
-        intensity_f = int(request.args.get("intensity"))/100
-
-        if intensity_f > 1.0:
-            intensity_f = 1.0
-        elif intensity_f < 0.0:
-            intensity_f = 0.0
-
-        dc = DeviceControl(MAC_ADDR[0]);
-        dc1 = DeviceControl(MAC_ADDR[1]);
-        dc2 = DeviceControl(MAC_ADDR[2]);
-        dc3 = DeviceControl(MAC_ADDR[3]);
-
-        dc.modify_intensity(intensity_f)
-        dc1.modify_intensity(intensity_f)
-        dc2.modify_intensity(intensity_f)
-        dc3.modify_intensity(intensity_f)
         return ""
+    
 #sd = ScanDevices()
 
 #for dev in sd.device_array:
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
-#app.run(host='0.0.0.0')
-
-dc = DeviceControl(MAC_ADDR[0]);
-dc1 = DeviceControl(MAC_ADDR[1]);
-
-dc.turn_on()
-dc1.turn_on()
-
-input()
-
-dc = DeviceControl(MAC_ADDR[0]);
-dc1 = DeviceControl(MAC_ADDR[1]);
-
-dc.turn_off()
-dc1.turn_off()
+app.run(host='0.0.0.0')
