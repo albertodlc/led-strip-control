@@ -112,10 +112,10 @@ class DeviceControl:
 
         led_status = Utils.file_creation(mac_addr)
 
-        print(led_status("MAC"))
-        print(led_status("R"))
-        print(led_status("G"))
-        print(led_status("B"))
+        print(led_status["MAC"])
+        print(led_status["R"])
+        print(led_status["G"])
+        print(led_status["B"])
 
         # Init LED STRIP with white color
         self.R = 255
