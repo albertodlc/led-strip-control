@@ -308,7 +308,6 @@ dc1.turn_on()
 dc2.turn_on()
 dc3.turn_on()
 
-input()
 
 
 dc = DeviceControl(MAC_ADDR[0]);
