@@ -89,7 +89,7 @@ class Utils():
     def file_creation(name, mac_addr):
         try:
             f = open(mac_addr + ".json", "r")
-                led_status = json.load()
+            led_status = json.load(f)
 
         except FileNotFoundError:
 
