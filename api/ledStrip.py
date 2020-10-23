@@ -1,5 +1,5 @@
 from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate
-import struct, time, flask
+import time, flask, json
 from flask import request
 
 # Flask Web App definition
@@ -85,8 +85,33 @@ class Utils():
     def rgb_to_hex(R, G, B):
         return '{:02x}{:02x}{:02x}'.format(R, G, B)
 
+    @staticmethod
+    def file_creation(name, mac_addr):
+        try:
+            f = open(mac_addr + ".json", "r")
+                led_status = json.load()
+
+        except FileNotFoundError:
+
+            led_status = {
+                            "MAC": mac_addr,
+                            "R" : 255,
+                            "G" : 255,
+                            "B" : 255
+            }
+
+            with open(mac_addr + ".json", "w") as file:
+                json.dump(led_status, f, indent = 1)
+            file.close()
+        finally:
+            f.close()
+            return led_status
+
 class DeviceControl:
     def __init__(self, mac_addr):
+
+
+
         # Init LED STRIP with white color
         self.R = 255
         self.G = 255
@@ -100,26 +125,27 @@ class DeviceControl:
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
 
-    #def show_perif_services_char(self):
-    #    print("\n\tDevice:" + self.p.addr)
-    #    print("\t\t", end = '')
-    #    print(self.s)
-    #    print("\t\t\t", end = '')
-    #    print(self.ch)
+    def show_perif_services_char(self):
+        print("\n\tDevice:" + self.p.addr)
+        print("\t\t", end = '')
+        print(self.s)
+        print("\t\t\t", end = '')
+        print(self.ch)
 
-    #def show_perif(self):
-    #    print("\nDevice: " + self.p.addr)
+    def show_perif(self):
+        print("\nDevice: " + self.p.addr)
 
-    #def show_services(self):
-    #    print("Services:")
-    #    for s in self.p.getServices():
-    #        print("\tUUID", s.uuid.getCommonName(), s.uuid.binVal)
+    def show_services(self):
+        print("Services:")
+        for s in self.p.getServices():
+            print("\tUUID", s.uuid.getCommonName(), s.uuid.binVal)
 
-    #def show_charac(self):
-    #    print("Characteristics")
-    #    for s in self.p.getServices():
-    #        for ch in s.getCharacteristics():
-    #            print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
+    def show_charac(self):
+        print("Characteristics")
+        for s in self.p.getServices():
+            for ch in s.getCharacteristics():
+                print("\tUUID", ch.uuid.getCommonName(), s.uuid.binVal)
+
     def turn_on(self):
         self.ch_W.write(LedStripMessages.on_message())
         self.p.disconnect()
@@ -223,4 +249,5 @@ class API():
 #for dev in sd.device_array:
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
-app.run(host='0.0.0.0')
+dc = DeviceControl(MAC_ADDR[0])
+#app.run(host='0.0.0.0')
