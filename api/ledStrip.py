@@ -195,8 +195,16 @@ class DeviceControl:
         self.p.disconnect()
 
     def set_color(self, R, G, B):
-        self.ch_W.write(LedStripMessages.color_message(self.R, self.G, self.B))
+        # SET color of the LED
+        self.ch_W.write(LedStripMessages.color_message(R, G, B))
         self.p.disconnect()
+
+        # Update status
+        self.led_status["R"] = R
+        self.led_status["G"] = G
+        self.led_status["B"] = B
+
+        Utils.file_modification(self.led_status)
 
 
 class API():
