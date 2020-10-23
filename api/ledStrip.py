@@ -1,4 +1,4 @@
-from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate, ADDR_TYPE_RANDOM
+from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate
 import time, flask, json
 from flask import request
 
@@ -137,7 +137,7 @@ class DeviceControl:
         # Save/Load the status of the LED
         self.led_status = Utils.file_creation(mac_addr)
 
-        self.p = Peripheral(self.led_status["MAC"], ADDR_TYPE_RANDOM)
+        self.p = Peripheral(self.led_status["MAC"])
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
 
