@@ -119,18 +119,18 @@ class Utils():
     @staticmethod
     def file_modification(led_status):
         f = open(led_status["MAC"] + ".json", "r")
-        led_status_old = json.load(f)
+        led_status_updated = json.load(f)
         f.close()
 
-        led_status_old["R"] = led_status["R"]
-        led_status_old["G"] = led_status["G"]
-        led_status_old["B"] = led_status["B"]
+        led_status_updated["R"] = led_status["R"]
+        led_status_updated["G"] = led_status["G"]
+        led_status_updated["B"] = led_status["B"]
 
-        led_status_old["POWER"] = led_status["POWER"]
+        led_status_updated["POWER"] = led_status["POWER"]
 
-        f = open(led_status["MAC"] + ".json", "w")
-        json.dump(led_status_old, f, indent = 1)
-        f.close()
+        with open(led_status_updated["MAC"] + ".json", "w") as f:
+            json.dump(led_status_updated, f, indent = 1)
+            f.close()
 
 class DeviceControl:
     def __init__(self, mac_addr):
