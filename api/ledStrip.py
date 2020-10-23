@@ -185,7 +185,7 @@ class DeviceControl:
             self.p.disconnect()
 
             # Update status
-            self.led_status["POWER"] = "on"
+            self.led_status["POWER"] = "off"
             Utils.file_modification(self.led_status)
 
     def modify_intensity(self, intensity):
