@@ -137,7 +137,7 @@ class DeviceControl:
         # Save/Load the status of the LED
         self.led_status = Utils.file_creation(mac_addr)
 
-        self.p = Peripheral(self.led_status["MAC"])
+        self.p = Peripheral(self.led_status["MAC"], btle.ADDR_TYPE_RANDOM)
         self.s = self.p.getServiceByUUID(LED_SERVICES[4])
         self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
 
