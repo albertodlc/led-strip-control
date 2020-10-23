@@ -296,13 +296,4 @@ class API():
 #for dev in sd.device_array:
 #    dc = DeviceControl(dev)
 #    dc.close_connection()
-dc = DeviceControl(MAC_ADDR[0]);
-dc1 = DeviceControl(MAC_ADDR[1]);
-dc2 = DeviceControl(MAC_ADDR[2]);
-dc3 = DeviceControl(MAC_ADDR[3]);
-
-dc.turn_on()
-dc1.turn_on()
-dc2.turn_on()
-dc3.turn_on()
-#app.run(host='0.0.0.0')
+app.run(host='0.0.0.0')
