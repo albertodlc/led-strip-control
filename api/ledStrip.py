@@ -86,13 +86,12 @@ class Utils():
         return '{:02x}{:02x}{:02x}'.format(R, G, B)
 
     @staticmethod
-    def file_creation(name, mac_addr):
+    def file_creation(mac_addr):
         try:
             f = open(mac_addr + ".json", "r")
             led_status = json.load(f)
 
         except FileNotFoundError:
-
             led_status = {
                             "MAC": mac_addr,
                             "R" : 255,
@@ -110,7 +109,7 @@ class Utils():
 class DeviceControl:
     def __init__(self, mac_addr):
 
-
+        Utils.file_creation(mac_addr)
 
         # Init LED STRIP with white color
         self.R = 255
