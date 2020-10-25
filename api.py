@@ -7,7 +7,7 @@ import flask
 from flask import request
 import ledStrip as ls
 import threading
-
+import time
 
 
 MAC_ADDR = [
@@ -26,6 +26,7 @@ class API():
     @app.route('/led/all/on', methods=['POST'])
     def turn_on_all():
         for m in MAC_ADDR:
+            time.sleep(0.5)
             dc = ls.DeviceControl(m)
             dc.turn_on()
             dc.close_connection()
@@ -34,6 +35,7 @@ class API():
     @app.route('/led/all/off', methods=['POST'])
     def turn_off_all():
         for m in MAC_ADDR:
+            time.sleep(0.1)
             dc = ls.DeviceControl(m)
             dc.turn_off()
             dc.close_connection()
