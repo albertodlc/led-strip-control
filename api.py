@@ -1,8 +1,3 @@
-import sys, os
-
-lib_path = os.path.realpath(".") + "/modules"
-sys.path.append(lib_path)
-
 import flask
 from flask import request
 import ledStrip as ls
@@ -21,7 +16,7 @@ MAC_ADDR = [
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
 
-    
+
 class API():
     @app.route('/led/all/on', methods=['POST'])
     def turn_on_all():
@@ -39,9 +34,7 @@ class API():
             dc = ls.DeviceControl(m)
             dc.turn_off()
             dc.close_connection()
-            
+
         return ""
 
 app.run(host='0.0.0.0')
-
-
