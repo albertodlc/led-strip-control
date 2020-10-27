@@ -84,9 +84,9 @@ class DeviceControl:
         #    print(s.uuid.getCommonName())
         #    print(s.getCharacteristics())
 
-        #self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
+        self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
         self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
-        #self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
