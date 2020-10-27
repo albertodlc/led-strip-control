@@ -3,6 +3,7 @@ import bluepy.btle as btle
 import utils as Utils
 import ledStripMessages as LedStripMessages
 from struct import *
+import re
 
 # LED STRIP SERVICES (Depend of the strip, maybe you have to CHANGE THIS)
 LED_SERVICES = [
@@ -88,7 +89,9 @@ class DeviceControl:
         self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
-        print(self.ch_N.read().hex())
+        code = re.findall(".",self.ch_N.read().hex())
+        for c in code:
+            print(c + " ", end = '')
         #self.p.waitForNotifications(5.0) # Wait for 5 second
 
         #self.ch_N.write(bytearray.fromhex("01"))
