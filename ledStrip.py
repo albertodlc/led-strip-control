@@ -77,7 +77,8 @@ class DeviceControl:
         self.info_device = msg
 
         #self.p.setDelegate(MyDelegate(DefaultDelegate))
-        print("\n" + self.info_device)
+        print("\n")
+        print(self.info_device)
         #self.services = self.p.getServices()
         #for s in self.services:
         #    print(s.uuid.getCommonName())
