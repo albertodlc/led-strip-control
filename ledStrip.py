@@ -77,18 +77,18 @@ class DeviceControl:
 
         #self.p.setDelegate(MyDelegate(DefaultDelegate))
         print(self.info_device)
-        self.services = self.p.getServices()
-        for s in self.services:
-            print(s.uuid.getCommonName())
-            print(s.getCharacteristics())
+        #self.services = self.p.getServices()
+        #for s in self.services:
+        #    print(s.uuid.getCommonName())
+        #    print(s.getCharacteristics())
+
         #self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
-        #self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
+        self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
         #self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
-        #self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
+        self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
-        print()
-        #print(self.ch_N.read())
+        print(self.ch_N.read())
         #self.p.waitForNotifications(5.0) # Wait for 5 second
 
         #self.ch_N.write(bytearray.fromhex("01"))
