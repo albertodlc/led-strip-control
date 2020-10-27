@@ -91,7 +91,7 @@ class DeviceControl:
 
     def notifications(self):
         self.ch_W.write(bytearray.fromhex("EF0177"))
-        sleep(5)
+        time.sleep(5)
         code = re.findall("..",self.ch_N.read().hex())
         for c in code:
             print(c + " ", end = '')
