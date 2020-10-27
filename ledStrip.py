@@ -12,9 +12,8 @@ LED_SERVICES = [
                 UUID(0xFFD5)  # Unknown
                 ]
 
-LED_CHARACTERISTICS = [UUID(0xFFD9) #
-
-                       ]
+LED_CHARACTERISTICS = [UUID(0xFFD9), # Control
+                       UUID(0xFFD4)] # Notifications
 
 # Class override to handle notifications from the devices
 class ScanDelegate(DefaultDelegate):
@@ -62,8 +61,18 @@ class DeviceControl:
         }
 
         self.p = Peripheral(self.led_status["MAC"])
-        self.s = self.p.getServiceByUUID(LED_SERVICES[4])
-        self.ch_W = self.s.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
+        self.s_N = self.p.getServiceByUUID(LED_SERVICES[4])
+        self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.ch_N = self.s_N.getCharacteristics(LED_CHARACTERISTICS[1])[0]
+
+    def notifications(self):
+        self.ch_W.write("EF")
+        if self.p.waitForNotifications(5.0): # Wait for 5 second
+            continue
+
+    def handleNotification(self, cHandle, data):
+        print(data)
 
     def turn_on(self):
         # Turn ON the light
