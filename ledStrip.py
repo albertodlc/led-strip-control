@@ -67,9 +67,9 @@ class DeviceControl:
         self.ch_N = self.s_N.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
-        self.ch_W.write("EF")
-        if self.p.waitForNotifications(5.0): # Wait for 5 second
-            continue
+        self.ch_W.write(bytearray.fromhex("EF"))
+        self.p.waitForNotifications(5.0) # Wait for 5 second
+
 
     def handleNotification(self, cHandle, data):
         print(data)
