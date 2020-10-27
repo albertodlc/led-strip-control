@@ -3,7 +3,7 @@ import bluepy.btle as btle
 import utils as Utils
 import ledStripMessages as LedStripMessages
 from struct import *
-import re
+import re, time
 
 # LED STRIP SERVICES (Depend of the strip, maybe you have to CHANGE THIS)
 LED_SERVICES = [
