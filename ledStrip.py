@@ -8,12 +8,12 @@ LED_SERVICES = [
                 UUID(0x1800), # Generic Access
                 UUID(0x1801), # Generic Attribute
                 UUID(0x180A), # Device Info
-                UUID(0xFFD0), # Unknown
-                UUID(0xFFD5)  # Unknown
+                UUID(0xFFD0), # Notifications
+                UUID(0xFFD5)  # Control
                 ]
 
 LED_CHARACTERISTICS = [UUID(0xFFD9), # Control
-                       ] # Notifications
+                       UUID(0xFFD4)] # Notifications
 
 # Class override to handle notifications from the devices
 class ScanDelegate(DefaultDelegate):
@@ -62,13 +62,12 @@ class DeviceControl:
 
         self.p = Peripheral(self.led_status["MAC"])
         self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
-        #self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
-        self.ch_W = self.s_W.getCharacteristics()
-        print(self.ch_W)
-        #self.ch_N = self.s_W.getCharacteristics(UUID(0xFFD4))[0]
+        self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
+        self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
-        self.ch_W.write(bytearray.fromhex("EF"))
+        self.ch_N.write(bytearray.fromhex("EF"))
         self.p.waitForNotifications(5.0) # Wait for 5 second
 
 
