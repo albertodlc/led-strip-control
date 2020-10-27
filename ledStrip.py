@@ -89,7 +89,7 @@ class DeviceControl:
         self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
-        code = re.findall(".",self.ch_N.read().hex())
+        code = re.findall("..",self.ch_N.read().hex())
         for c in code:
             print(c + " ", end = '')
         #self.p.waitForNotifications(5.0) # Wait for 5 second
