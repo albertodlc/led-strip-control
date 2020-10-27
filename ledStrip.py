@@ -26,6 +26,14 @@ class ScanDelegate(DefaultDelegate):
         elif isNewData:
             print("Received new data from", dev.addr)
 
+class MyDelegate(DefaultDelegate):
+    def __init__(self, params):
+        DefaultDelegate.__init__(self)
+        # ... initialise here
+
+    def handleNotification(self, cHandle, data):
+        print(data)
+
 class ScanDevices:
     def __init__(self, sd = None, scan_time = 10.0):
         self.scan_time = scan_time
@@ -61,18 +69,23 @@ class DeviceControl:
         }
 
         self.p = Peripheral(self.led_status["MAC"])
+
+        p.setDelegate(MyDelegate(DefaultDelegate)
+
         self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
         self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
         self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
-        self.ch_N.write(bytearray.fromhex("EF"))
+        self.ch_W.write(bytearray.fromhex("EF"))
         self.p.waitForNotifications(5.0) # Wait for 5 second
 
+        self.ch_W.write(bytearray.fromhex("01"))
+        self.p.waitForNotifications(5.0) # Wait for 5 second
 
-    def handleNotification(self, cHandle, data):
-        print(data)
+        self.ch_W.write(bytearray.fromhex("77"))
+        self.p.waitForNotifications(5.0) # Wait for 5 second
 
     def turn_on(self):
         # Turn ON the light
