@@ -73,7 +73,7 @@ class DeviceControl:
         #self.p.setDelegate(MyDelegate(DefaultDelegate))
         self.services = self.p.getServices()
         for s in self.services:
-            print(s.uuid.binVal)
+            print(s.uuid.getCommonName())
             print(s.getCharacteristics())
         #self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
         #self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
