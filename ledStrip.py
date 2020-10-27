@@ -90,7 +90,7 @@ class DeviceControl:
         self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
-        #self.ch_W.write(bytearray.fromhex("EF0177"))
+        self.ch_W.write(bytearray.fromhex("EF0177"))
         code = re.findall("..",self.ch_N.read().hex())
         for c in code:
             print(c + " ", end = '')
