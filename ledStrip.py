@@ -70,12 +70,13 @@ class DeviceControl:
 
         self.p = Peripheral(self.led_status["MAC"])
 
-        self.p.setDelegate(MyDelegate(DefaultDelegate))
-
-        self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
-        self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
-        self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
-        self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
+        #self.p.setDelegate(MyDelegate(DefaultDelegate))
+        self.services = self.p.getServices()
+        print(self.services)
+        #self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
+        #self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
+        #self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
+        #self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
         print(self.ch_N.read())
