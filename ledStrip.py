@@ -71,8 +71,8 @@ class DeviceControl:
         self.p = Peripheral(self.led_status["MAC"])
 
         aux = self.p.getServiceByUUID(LED_SERVICES[0])
-        self.info_device = aux.getCharacteristics(bytearray.fromhex(UUID(0x2A00))
-        
+        self.info_device = aux.getCharacteristics(UUID(0x2A00))
+
         #self.p.setDelegate(MyDelegate(DefaultDelegate))
         print(self.info_device)
         self.services = self.p.getServices()
