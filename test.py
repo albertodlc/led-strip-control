@@ -7,6 +7,7 @@ MAC_ADDR = [
             "52:14:00:00:C6:A9" # Techo
             ]
 
-dc = ledStrip.DeviceControl(MAC_ADDR[1])
-dc.notifications()
-dc.close_connection()
+for m in MAC_ADDR:
+    dc = ledStrip.DeviceControl(m)
+    dc.notifications()
+    dc.close_connection()
