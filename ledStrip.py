@@ -70,7 +70,7 @@ class DeviceControl:
 
         self.p = Peripheral(self.led_status["MAC"])
 
-        p.setDelegate(MyDelegate(DefaultDelegate))
+        self.p.setDelegate(MyDelegate(DefaultDelegate))
 
         self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
         self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
