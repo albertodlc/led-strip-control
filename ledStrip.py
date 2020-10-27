@@ -77,18 +77,15 @@ class DeviceControl:
         self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
         self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
-        print(self.ch_W.propertiesToString())
-        print(self.ch_N.propertiesToString())
-
     def notifications(self):
-        self.ch_N.write(bytearray.fromhex("EF"))
-        self.p.waitForNotifications(5.0) # Wait for 5 second
+        print(self.ch_N.read())
+        #self.p.waitForNotifications(5.0) # Wait for 5 second
 
-        self.ch_N.write(bytearray.fromhex("01"))
-        self.p.waitForNotifications(5.0) # Wait for 5 second
+        #self.ch_N.write(bytearray.fromhex("01"))
+        #self.p.waitForNotifications(5.0) # Wait for 5 second
 
-        self.ch_N.write(bytearray.fromhex("77"))
-        self.p.waitForNotifications(5.0) # Wait for 5 second
+        #self.ch_N.write(bytearray.fromhex("77"))
+        #self.p.waitForNotifications(5.0) # Wait for 5 second
 
     def turn_on(self):
         # Turn ON the light
