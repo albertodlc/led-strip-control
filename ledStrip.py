@@ -72,7 +72,9 @@ class DeviceControl:
 
         #self.p.setDelegate(MyDelegate(DefaultDelegate))
         self.services = self.p.getServices()
-        print(self.services)
+        for s in self.services:
+            print(s.uuid)
+            print(s.getCharacteristics())
         #self.s_W = self.p.getServiceByUUID(LED_SERVICES[4])
         #self.s_R = self.p.getServiceByUUID(LED_SERVICES[3])
         #self.ch_W = self.s_W.getCharacteristics(LED_CHARACTERISTICS[0])[0]
