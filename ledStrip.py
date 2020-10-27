@@ -2,6 +2,7 @@ from bluepy.btle import UUID, Peripheral, Scanner, DefaultDelegate
 import bluepy.btle as btle
 import utils as Utils
 import ledStripMessages as LedStripMessages
+from struct import *
 
 # LED STRIP SERVICES (Depend of the strip, maybe you have to CHANGE THIS)
 LED_SERVICES = [
@@ -71,7 +72,8 @@ class DeviceControl:
         self.p = Peripheral(self.led_status["MAC"])
 
         aux = self.p.getServiceByUUID(LED_SERVICES[0]).getCharacteristics(UUID(0x2A00))[0]
-        self.info_device = aux.read()
+        msg = aux.read()
+        self.info_device = unpack("s",msg)
 
         #self.p.setDelegate(MyDelegate(DefaultDelegate))
         print(self.info_device)
