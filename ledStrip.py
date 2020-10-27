@@ -90,16 +90,10 @@ class DeviceControl:
         self.ch_N = self.s_R.getCharacteristics(LED_CHARACTERISTICS[1])[0]
 
     def notifications(self):
+        self.ch_N.write(bytearray.fromhex("EF0177"))
         code = re.findall("..",self.ch_N.read().hex())
         for c in code:
             print(c + " ", end = '')
-        #self.p.waitForNotifications(5.0) # Wait for 5 second
-
-        #self.ch_N.write(bytearray.fromhex("01"))
-        #self.p.waitForNotifications(5.0) # Wait for 5 second
-
-        #self.ch_N.write(bytearray.fromhex("77"))
-        #self.p.waitForNotifications(5.0) # Wait for 5 second
 
     def turn_on(self):
         # Turn ON the light
