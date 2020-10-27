@@ -73,7 +73,7 @@ class DeviceControl:
 
         aux = self.p.getServiceByUUID(LED_SERVICES[0]).getCharacteristics(UUID(0x2A00))[0]
         msg = aux.read()
-        self.info_device = unpack("s",msg)
+        self.info_device = msg
 
         #self.p.setDelegate(MyDelegate(DefaultDelegate))
         print(self.info_device)
