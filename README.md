@@ -1,9 +1,5 @@
 # Bluetooth LED Strip control (with Google Assistant)
 
-sudo hciconfig hci0 down sudo hciconfig hci0 up
-
-
-
 <p align="center">
     <img height="auto" width="auto" src="img/img0.jpg" />
 </p>
